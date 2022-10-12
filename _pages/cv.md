@@ -11,30 +11,32 @@ redirect_from:
 
 Education
 ======
-* B.S. in GitHub, GitHub University, 2012
-* M.S. in Jekyll, GitHub University, 2014
-* Ph.D in Version Control Theory, GitHub University, 2018 (expected)
+* PhD in Biomedical Engineering, Jan. 2021 - present
+  * University of Bern, Graduate School for Cellular and Biomedical Sciences (GCB), Bern, Switzerland
+  * Supervisor: Prof. Dr. ing. Kuangyu Shi
+  * Main project: Development of a small-scale system capable of imaging Organs-on-Chips
+
+* Honours Degree in Technology Management, Aug. 2019 - present
+  * Center for Digital Technology & Management (CDTM), Munich, Germany
+  * Courses: Trend Seminar, Managing Product Development, Interface Aesthetics, Self Leadership Backbone
+
+* M.Sc. Robotics, Cognition, Intelligence, Oct. 2018 - Oct. 2020
+  * Technical University of Munich (TUM), Munich, Germany
+  * Master's Thesis at Inselspital Bern: Predict Gamma Ray Interaction Position in Scintillation Material Using Deep Learning
+  * Courses: Computer Aided Medical Procedures I \& II, Computer Vision, Machine Learning, Advanced Deep Learning
+
+* B.Sc. Engineering Science, Aug. 2014 - Sep. 2018
+  * Technical University of Munich (TUM), Munich, Germany
+  * Bachelor's Thesis: Autonomous locomotion control for a snake like robot
+  * Courses: Higher Mathematics, Algorithms, Operating Systems, Computer Networking
+
 
 Work experience
 ======
-* Summer 2015: Research Assistant
-  * Github University
-  * Duties included: Tagging issues
-  * Supervisor: Professor Git
 
-* Fall 2015: Research Assistant
-  * Github University
-  * Duties included: Merging pull requests
-  * Supervisor: Professor Hub
-  
+
 Skills
 ======
-* Skill 1
-* Skill 2
-  * Sub-skill 2.1
-  * Sub-skill 2.2
-  * Sub-skill 2.3
-* Skill 3
 
 Publications
 ======
@@ -48,12 +50,3 @@ Talks
     {% include archive-single-talk-cv.html %}
   {% endfor %}</ul>
   
-Teaching
-======
-  <ul>{% for post in site.teaching %}
-    {% include archive-single-cv.html %}
-  {% endfor %}</ul>
-  
-Service and leadership
-======
-* Currently signed in to 43 different slack teams
