@@ -10,39 +10,44 @@ tags:
 ---
 # Kickstart your next Python project with Poetry, pre-commit, and GitHub Actions
 
-When setting up a new Python project, you probably have experienced that it takes quite some time and effort to do so. You have to make a lot of decisions, and when you are not completely sure how to do it, it takes time and mental energy away from actually working on the project.
+When setting up a new Python project, you have probably experienced that it takes quite some time and effort to do so. 
+You have to make a lot of decisions, and when you are not completely sure how to do it, it takes time and mental energy away from actually working on the project.
 
-Wouldn't it be great if you could do it right once and then profit from it in all the following projects? This is exactly what you are going to do in this tutorial. You will set up a reasonable Python template project suitable for most tasks.
+Wouldn't it be great if you could do it right once and then profit from it in all the following projects? 
+This is exactly what you are going to do in this tutorial. 
+You will set up a reasonable Python template project suitable for most tasks.
 
 These set up steps include:
 
-- **Creating a sensible project structure:** In [this](https://www.kennethreitz.org/essays/repository-structure-and-python) great article, [Kenneth Reitz](https://github.com/kennethreitz) explains why a good project structure is so important and gives his recommendation for a sample repository.
-- **Managing Python package dependencies:** Most Python projects require additional packages to fulfill their purpose. Managing these dependencies is an essential task for every Python project.  
-- **Setting up code styling rules:** Having consistent code styling rules improves the code's readability and thus let's other persons join a project easier. In the best case, the rules are automatically enforced, so you do not have to think about them once they are set up.
-- **Setting up Continuous Integration (CI) to automatically test the code:** With [CI](https://martinfowler.com/articles/continuousIntegration.html), you want to make sure that mistakes are discovered early and quickly. Using a CI tool that automatically runs the tests after every push to the repo also makes this step a piece of mind.
+- **Creating a sensible project structure:** 
+In [this](https://kennethreitz.org/essays/2013/01/27/repository-structure-and-python) great article, [Kenneth Reitz](https://github.com/kennethreitz) explains why a good project structure is so important and gives his recommendation for a sample repository.
+- **Managing Python package dependencies:** 
+Most Python projects require additional packages to fulfill their purpose. 
+Managing these dependencies is an essential task for every Python project.  
+- **Setting up code styling rules:** 
+Having consistent code styling rules improves the code's readability and thus let's other persons join a project easier. 
+In the best case, the rules are automatically enforced, so you do not have to think about them once they are set up.
+- **Setting up Continuous Integration (CI) to automatically test the code:** 
+With [CI](https://martinfowler.com/articles/continuousIntegration.html), you want to make sure that mistakes are discovered early and quickly. 
+Using a CI tool that automatically runs the tests after every push to the repo also makes this step a piece of mind.
 
-This list of steps is by no means inclusive, but a sensible starting point for most Python projects. In the next few paragraphs, you will go over each of these steps to create a Python template repo that gets your next projects up and running in minutes. For each step, you will make use of great open-source projects that greatly help to achieve the goal.
+This list of steps is by no means inclusive, but a sensible starting point for most Python projects. 
+In the next few paragraphs, you will go over each of these steps to create a Python template repo that gets your next projects up and running in minutes. 
+For each step, you will make use of great open-source projects that help to achieve the goal.
 
 ## Creating a Project Structure and Manage Dependencies with Poetry
 
-As a first step, you create a default project structure and set up dependency management. [Poetry](https://python-poetry.org/) is a tool for exactly that created by [Sébastien Eustace](https://github.com/sdispater). With Poetry, you can create deterministic builds, package your project, and publish it to PyPI using only a handful of easy commands. Besides its own nice [documentation](https://python-poetry.org/docs/), there is also [this](https://hackersandslackers.com/python-poetry-package-manager/) great introduction to Poetry if you want to learn more about it.
+As a first step, you create a default project structure and set up dependency management. 
+[Poetry](https://python-poetry.org/) is a tool for exactly that created by [Sébastien Eustace](https://github.com/sdispater).
+With Poetry, you can create deterministic builds, package your project, and publish it to PyPI using only a handful of easy commands. 
+Besides its own nice [documentation](https://python-poetry.org/docs/), there is also [this](https://hackersandslackers.com/python-poetry-package-manager/) great introduction to Poetry if you want to learn more about it.
 
 Simply follow these steps to set up a default project structure and add first dependencies:
 
-### 1. Create a clean Python environment using [pyenv](https://github.com/pyenv/pyenv) and activate it
+### 1. Create a new project with a reasonable default project structure using Poetry
 
-To create a clean Python environment, I suggest using pyenv, a tool to manage different Python versions. If you do not have it on your system already, follow [this](https://realpython.com/intro-to-pyenv/) great guide by Real Python. Then simply run the following commands:
-
-```bash
-pyenv install 3.7.7
-pyenv global 3.7.7
-```
-
-This will install Python 3.7.7 from source and set it as the global Python version.
-
-### 2. Create a new project with a reasonable default project structure using Poetry
-
-Install Poetry by following the install instructions for your OS on their [website](https://python-poetry.org/docs/#installation). Then you can run the following command to create a default project structure:
+Install Poetry by following the install instructions for your OS on their [website](https://python-poetry.org/docs/#installation). 
+Then you can run the following command to create a default project structure:
 
 ```bash
 poetry new python-template-repo
@@ -54,11 +59,10 @@ This creates the following directory structure:
 python-template-repo
 ├── pyproject.toml
 ├── python_template_repo
-│   └── __init__.py
-├── README.rst
+│   └── __init__.py
+├── README.md
 └── tests
-    ├── __init__.py
-    └── test_python_template_repo.py
+    └── __init__.py
 ```
 
 The most important file here at the moment is `pyproject.toml` that contains general information about the project and its dependencies and is used by Poetry to manage the project:
@@ -68,65 +72,106 @@ The most important file here at the moment is `pyproject.toml` that contains gen
 name = "python-template-repo"
 version = "0.1.0"
 description = ""
-authors = ["Christoph Clement <christoph.clement@tum.de>"]
+authors = ["Christoph Clement <christoph.clement@students.unibe.ch>"]
+readme = "README.md"
+packages = [{include = "python_template_repo"}]
 
 [tool.poetry.dependencies]
-python = "^3.7"
+python = "^3.9"
 
-[tool.poetry.dev-dependencies]
-pytest = "^5.2"
 
 [build-system]
-requires = ["poetry>=0.12"]
-build-backend = "poetry.masonry.api"
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
 ```
 
-For now, the only dependencies we have are Python 3.7 and pytest. The `[build-system]` entry makes it compliant with [PEP-517](https://www.python.org/dev/peps/pep-0517/). You can find more information about what can be specified in the file in Poetry's documentation [here](https://python-poetry.org/docs/pyproject/).
+For now, the only dependencies we have is Python 3.9. 
+The `[build-system]` entry makes it compliant with [PEP-517](https://www.python.org/dev/peps/pep-0517/). 
+You can find more information about what can be specified in the file in Poetry's documentation [here](https://python-poetry.org/docs/pyproject/).
 
-### 3. Install the first dependency
+### 2. Install the first dependency
 
 ```bash
 cd python-template-repo
-poetry add click
+poetry add fire
 ```
 
-Adding a dependency to the project works with the `poetry add` command and the required package's name. You can find more information about the command and how to specify package versions [here](https://python-poetry.org/docs/cli/#add). In this example, you add [Click](https://click.palletsprojects.com/en/7.x/), a Python package for creating command-line interfaces used later in a short template script.
+Adding a dependency to the project works with the `poetry add` command and the required package's name. 
+You can find more information about the command and how to specify package versions [here](https://python-poetry.org/docs/cli/#add). 
+In this example, you add [Python Fire](https://github.com/google/python-fire), a Python library for automatically generating command line interfaces (CLIs) by Google.
 
-After adding a new dependency, Poetry adds (if it is the first dependency) or updates a file called `poetry.lock` containing the exact versions of the downloaded packages. These are used when someone or something else, e.g., a colleague or a CI server, installs the dependencies using the `poetry install` command. This ensures that the project does not break because of different versions of dependencies.
+After adding a new dependency, Poetry adds (if it is the first dependency) or updates a file called `poetry.lock` containing the exact versions of the downloaded packages. 
+These are used when someone or something else, e.g., a colleague or a CI server, installs the dependencies using the `poetry install` command. 
+This ensures that the project does not break because of different versions of dependencies.
 
 ## Automatically Enforcing Code Formatting Rules with pre-commit
 
 When writing new code, one of the most important things to keep in mind is the following:
 > "[...] code is read much more often than it is written."  - [PEP 8](https://www.python.org/dev/peps/pep-0008/)
 
-Apart from structuring your code well, a consistent style highly contributes to readable and understandable code. Apart from PEP 8 itself, which is a great read, I can recommend going over [this](https://docs.python-guide.org/writing/style/) great article by [The Hitchhiker’s Guide to Python](https://docs.python-guide.org/) about "Pythonic" guidelines and idioms.
+Apart from structuring your code well, a consistent style highly contributes to readable and understandable code.
+Apart from PEP 8 itself, which is a great read, I can recommend going over [this](https://docs.python-guide.org/writing/style/) great article by [The Hitchhiker’s Guide to Python](https://docs.python-guide.org/) about "Pythonic" guidelines and idioms.
 
-It helps a lot to have an understanding of these rules and guidelines. But actually, when you are working on a project, you do not want to waste mental energy by thinking about how to best format the code. Exactly for this reason, there are some helpful tools out there that do this job for you.
+It helps a lot to have an understanding of these rules and guidelines. 
+But actually, when you are working on a project, you do not want to waste mental energy by thinking about how to best format the code. 
+Exactly for this reason, there are some helpful tools out there that do this job for you.
 
-A great way to incorporate these tools into a project is to use [Git Hooks](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks) to check files automatically before committing them. Here, you will use [pre-commit](https://pre-commit.com/), a framework for managing and maintaining pre-commit hooks.
+A great way to incorporate these tools into a project is to use [Git Hooks](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks) to check files automatically before committing them.
+Here, you will use [pre-commit](https://pre-commit.com/), a framework for managing and maintaining pre-commit hooks.
 
 With the following steps, you can quickly set up several pre-commit checks to enforce a consistent code style throughout the whole project.
 
-### 1. Install and add pre-commit to the dependencies
+### 1. Install and add pre-commit to the dev dependencies
 
 ```bash
-poetry add pre-commit
+poetry add pre-commit --group dev
 ```
 
 ### 2. Configure the hooks that we want to use
 
-Create a file called `.pre-commit-config.yaml` in the root dir of the project. There, the hooks are configured. The following is the default configuration that I use for projects. It makes use of hooks that come directly with pre-commit, like checking the format of JSON and YAML files or whether large files are added to Git. Additionally, [flake8](https://gitlab.com/pycqa/flake8) is used to display warnings about style inconsistencies, and [black](https://github.com/psf/black) is used to format the code automatically.
+Create a file called `.pre-commit-config.yaml` in the root dir of the project. 
+There, the hooks are configured. 
+The following is the default configuration that I use for projects. 
+It makes use of hooks that come directly with pre-commit, like checking the format YAML files or whether large files are added to Git. 
+Additionally, [black](https://github.com/psf/black) is used to format the code automatically.
 
-%[https://gist.github.com/chris-clem/25bc2871052ae0c447a0cf4e56111727]
+```yaml
+# See https://pre-commit.com for more information
+# See https://pre-commit.com/hooks.html for more hooks
+repos:
+-   repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v3.2.0
+    hooks:
+    -   id: check-added-large-files
+    -   id: check-ast
+    -   id: check-check-merge-conflict
+    -   id: check-yaml
+    -   id: detect-private-key
+    -   id: end-of-file-fixer
+    -   id: trailing-whitespace
+
+-   repo: https://github.com/asottile/reorder_python_imports
+    rev: v3.9.0
+    hooks:
+    -   id: reorder-python-imports
+
+  - repo: https://github.com/psf/black
+    rev: 22.10.0
+    hooks:
+      - id: black
+        language_version: python3.9
+```
 
 ### 3. Install the hooks for the project
 
 ```bash
 git init
-pre-commit install
+poetry run pre-commit install
 ```
 
-Now, you can manually run these hooks whenever you want your code to be checked and formatted by running `pre-commit run --all-files`. Also, every time you want to commit, these checks are run, and if there is a failure, you cannot commit unless you fix it. This is sometimes a little annoying when you quickly want to commit something, but it ensures high coding quality in the long run.
+Now, you can manually run these hooks whenever you want your code to be checked and formatted by running `poetry run pre-commit run --all-files`. 
+Also, every time you want to commit, these checks are run, and if there is a failure, you cannot commit unless you fix it. 
+This is sometimes a little annoying when you quickly want to commit something, but it ensures high coding quality in the long run.
 
 ## Setting up Continuous Integration (CI) to automatically test code with GitHub Actions
 
