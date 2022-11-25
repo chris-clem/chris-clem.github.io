@@ -144,7 +144,7 @@ repos:
     hooks:
     -   id: check-added-large-files
     -   id: check-ast
-    -   id: check-check-merge-conflict
+    -   id: check-merge-conflict
     -   id: check-yaml
     -   id: detect-private-key
     -   id: end-of-file-fixer
@@ -155,12 +155,11 @@ repos:
     hooks:
     -   id: reorder-python-imports
 
-  - repo: https://github.com/psf/black
+-   repo: https://github.com/psf/black
     rev: 22.10.0
     hooks:
       - id: black
         language_version: python3.9
-
 ```
 
 ### 3. Install the hooks for the project
@@ -210,7 +209,6 @@ jobs:
     - name: Test with pytest
       run: |
         poetry run pytest
-
 ```
 
 This file defines the action `CI Testing` that gets triggered on new pushes and pull requests. 
@@ -258,12 +256,12 @@ def main(
 
 if __name__ == "__main__":
     fire.Fire(main)
-
 ```
 
 ### 3. Run the pre-commit hooks
 
-After creating the script, check whether it passes the pre-commit hooks. Try to commit your work by running the following command:
+After creating the script, check whether it passes the pre-commit hooks. 
+Try to commit your work by running the following command:
 
 ```bash
 git add .
@@ -275,35 +273,23 @@ You should get the following output from pre-commit:
 ```bash
 Check for added large files..............................................Passed
 Check python ast.........................................................Passed
-Check docstring is first.................................................Passed
-Check JSON...........................................(no files to check)Skipped
-Pretty format JSON...................................(no files to check)Skipped
+Check for merge conflicts................................................Passed
 Check Yaml...............................................................Passed
-Fix End of Files.........................................................Passed
-Trim Trailing Whitespace.................................................Passed
-flake8...................................................................Failed
-- hook id: flake8
+Detect Private Key.......................................................Passed
+Fix End of Files.........................................................Failed
+- hook id: end-of-file-fixer
 - exit code: 1
-
-python_template_repo/template_script.py:13:90: E501 line too long (113 > 89 characters)
-python_template_repo/template_script.py:14:90: E501 line too long (124 > 89 characters)
-python_template_repo/template_script.py:19:8: E111 indentation is not a multiple of four
-
-Reorder python imports...................................................Passed
-black....................................................................Failed
-- hook id: black
 - files were modified by this hook
 
-reformatted /home/christoph/PycharmProjects/python-template-repo/python_template_repo/__init__.py
-reformatted /home/christoph/PycharmProjects/python-template-repo/tests/test_python_template_repo.py
-reformatted /home/christoph/PycharmProjects/python-template-repo/python_template_repo/template_script.py
-All done! ✨ 🍰 ✨
-3 files reformatted, 1 file left unchanged.
+Fixing .pre-commit-config.yaml
+
+Trim Trailing Whitespace.................................................Passed
+Reorder python imports...................................................Passed
+black....................................................................Passed
 ```
 
-There are some flake8 errors, and black reformatted the file.
-
-When staging the changed files and committing again, all hooks pass, and you are good to go as black automatically fixed the flake8 errors:
+One check from pre-commit failed and it fixed the end-of-file for us.
+When staging the changed files and committing again, all hooks pass, and you are good to go:
 
 ```bash
 git add .
@@ -315,7 +301,7 @@ git commit -m "Initial commit"
 Use the following command to run the script inside the project's environment using Poetry:
 
 ```bash
-poetry run python python_template_repo/template_script.py
+poetry run python python_template_repo/main.py
 ```
 
 To shorten the command, you can add the script to the `pyproject.toml` file:
@@ -324,7 +310,7 @@ To shorten the command, you can add the script to the `pyproject.toml` file:
 ...
 
 [tool.poetry.scripts]
-template_script = "python_template_repo.template_script:main"
+main = "python_template_repo.main:main"
 
 [build-system]
 ...
@@ -333,14 +319,27 @@ template_script = "python_template_repo.template_script:main"
 Then, you can run the script like so:
 
 ```bash
-poetry run template_script
+poetry run main
 ```
 
-### 5. Check whether the CI tests pass
+### 5. Add test
 
-To check whether the CI tests pass, add a simple test that checks whether the template script runs without errors. Create a file called `test_template_script.py` in the `tests` directory:
+First, let's add [pytest](https://pytest.org) to our test dependencies:
 
-%[https://gist.github.com/chris-clem/ba025fb599ed604f7931cc0eb7b268e6]
+```bash
+poetry add pytest --group test
+```
+
+Then, let's add a simple test that checks whether the template script runs without errors. 
+Create a file called `test_main.py` in the `tests` directory:
+
+```python
+from python_template_repo.main import main
+
+
+def test_main():
+    main()
+```
 
 You can run the test locally with:
 
@@ -348,12 +347,13 @@ You can run the test locally with:
 poetry run pytest
 ```
 
-To see how the CI testing works, you first need to create a new GitHub repository. You can then push your work so far by running:
+To see how the CI testing works, you first need to create a new GitHub repository. 
+After you have done that, you can then push your work so far by running:
 
 ```bash
 git remote add origin git@github.com:[Your GitHub Username]/python-template-repo.git
 git add .
-git commit -m "Add test for template_script"
+git commit -m "Add test for main"
 git push -u origin master
 ```
 
@@ -361,13 +361,14 @@ You can then head over to your newly created GitHub repo and check whether the C
 
 ## Conclusion
 
-With these steps, you are well prepared for your next Python projects. You are ready to use Poetry for managing dependencies, pre-commit to automatically check your code style, and GitHub Actions to automatically test your code.
+With these steps, you are well prepared for your next Python projects. 
+You are ready to use Poetry for managing dependencies, pre-commit to automatically check your code style, and GitHub Actions to automatically test your code.
 
 Let me know how your Python project-setup steps look like!
 
 ## Bonus: Cookiecutter Template
 
-I provide this repo as a [Cookiecutter](https://cookiecutter.readthedocs.io/en/1.7.0/) template for the case you want to use exactly this Python project setup. Simply follow these steps to set up your project in minutes:
+I provide this repo as a [Cookiecutter](https://cookiecutter.readthedocs.io/en/stable/) template for the case you want to use exactly this Python project setup. Simply follow these steps to set up your project in minutes:
 
 ### 1. Install Cookiecutter
 
