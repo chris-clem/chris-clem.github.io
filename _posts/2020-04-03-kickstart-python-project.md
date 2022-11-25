@@ -160,6 +160,7 @@ repos:
     hooks:
       - id: black
         language_version: python3.9
+
 ```
 
 ### 3. Install the hooks for the project
@@ -175,36 +176,90 @@ This is sometimes a little annoying when you quickly want to commit something, b
 
 ## Setting up Continuous Integration (CI) to automatically test code with GitHub Actions
 
-The final step is to create a CI pipeline with [GitHub Actions](https://github.com/features/actions), which is free for public projects and students. With this pipeline, you will check whether all pre-commit hooks pass without an error and run tests with [pytest](https://docs.pytest.org/en/latest/).
+The final step is to create a CI pipeline with [GitHub Actions](https://github.com/features/actions), which is free for public projects and students. 
+With this pipeline, you will check whether all pre-commit hooks pass without an error and run tests with [pytest](https://docs.pytest.org/en/latest/).
 
-The setup is straight forward. Simply add the following `ci-testing.yml` file to the `.github/workflows/` directory of your project.
+The setup is straight forward. 
+Simply add the following `ci-testing.yml` file to the `.github/workflows/` directory of your project.
 
-%[https://gist.github.com/chris-clem/e29a1950f98c047ae4fd7612f6f0abb1]
+```yaml
+name: CI Testing
 
-This file defines the action `CI Testing` that gets triggered on new pushes and pull requests. It sets up an Ubuntu server with Python 3.7, runs the pre-commit hooks and the tests with pytest. For a more detailed look at how to set up actions for a Python project, check out the [GitHub help pages](https://help.github.com/en/actions/language-and-framework-guides/using-python-with-github-actions) for that topic.
+on: [push, pull_request]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python 3.9
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.9
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install poetry
+        poetry install
+        poetry run pre-commit install
+    - name: Run pre-commit hooks
+      run: |
+        poetry run pre-commit run --all-files
+    - name: Test with pytest
+      run: |
+        poetry run pytest
+
+```
+
+This file defines the action `CI Testing` that gets triggered on new pushes and pull requests. 
+It sets up an Ubuntu server with Python 3.9, installs the dependencies, runs the pre-commit hooks and the tests with pytest. 
+For a more detailed look at how to set up actions for a Python project, check out the [GitHub help pages](https://help.github.com/en/actions/language-and-framework-guides/using-python-with-github-actions) for that topic.
 
 ## Start Coding
 
 Now that you have set up a sensible project structure, dependency management, automatic formatting checks, and CI, it is time to start with the actual work.
 
-To demonstrate the pipeline, create a small demo script by following these steps:
+To demonstrate the pipeline, create a small demo script with following these steps:
 
 ### 1. Add necessary dependencies
 
-You have already installed Click and pre-commit in the previous steps. For the sake of this demonstration, additionally add [tqdm](https://tqdm.github.io/), a Python package to create progress bars.
+You have already installed pre-commit in the previous steps as a dev dependency. 
+For the sake of this demonstration, additionally add [tqdm](https://tqdm.github.io/) to create progress bars, and [loguru](https://github.com/Delgan/loguru) for easy logging.
 
 ```bash
-poetry add tqdm
+poetry add tqdm loguru
 ```
 
 ### 2. Create a template script
 
-In the next step, create a simple template script in the `python_template_repo/`
-directory:
+In the next step, create a simple template script in the `python_template_repo/` directory:
 
-%[https://gist.github.com/chris-clem/e050b04c5abe04ebca7681d1f3c178ae]
+```python
+from time import sleep
 
-It takes two arguments, `len_loop` and `sleep_seconds`, logs them, and runs a tqdm loop. Its sole purpose is to demonstrate how Click and tqdm work and have a script to test pre-commit.
+import fire
+from loguru import logger
+from tqdm import tqdm
+
+
+def main(
+    len_loop: int = 100,
+    sleep_seconds: float = 0.1,
+):
+    logger.info("Starting loop")
+
+    for _ in tqdm(range(len_loop)):
+        sleep(sleep_seconds)
+
+    logger.info("Finished loop")
+
+
+if __name__ == "__main__":
+    fire.Fire(main)
+
+```
 
 ### 3. Run the pre-commit hooks
 
