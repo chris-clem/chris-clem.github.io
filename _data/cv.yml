@@ -24,21 +24,21 @@
       year: 2019 - 2021
       description:
         - Hands-on projects on Entrepreneurship, Trend Research, Product Development, Rapid Prototyping
-        - 'Courses: Trend Seminar, Managing Product Development, Interface Aesthetics, Self Leadership Backbone'
+        - "Courses: Trend Seminar, Managing Product Development, Interface Aesthetics, Self Leadership Backbone"
 
     - title: Master's Thesis, Robotics, Cognition, Intelligence
       institution: University of Bern
       year: 2020
       description:
         - Grade 1.0
-        - 'Topic: Predict Gamma Ray Interaction Position in Scintillation Material Using Deep Learning'
+        - "Topic: Predict Gamma Ray Interaction Position in Scintillation Material Using Deep Learning"
 
     - title: Master of Science - MS, Robotics, Cognition, Intelligence
       institution: Technical University of Munich (TUM)
       year: 2018 - 2020
       description:
         - Final grade 1.4 (top 20%)
-        - 'Courses: Computer-Aided Medical Procedures I & II, Computer Vision, Machine Learning, Advanced Deep Learning'
+        - "Courses: Computer-Aided Medical Procedures I & II, Computer Vision, Machine Learning, Advanced Deep Learning"
 
     - title: Bayerische EliteAkademie (BEA)
       institution: Stiftung Bayerische EliteAkademie
@@ -52,7 +52,7 @@
       description:
         - Final grade 2.0 (top 20%)
         - "Bachelor's Thesis: Autonomous Locomotion Control for a Snake Like Robot, grade: 1.0"
-        - 'Courses: Higher Mathematics, Mechanical Engineering, Physics, Chemistry, Algorithms, Operating Systems, Computer Networking'
+        - "Courses: Higher Mathematics, Mechanical Engineering, Physics, Chemistry, Algorithms, Operating Systems, Computer Networking"
 
 - title: Experience
   type: time_table
