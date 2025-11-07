@@ -114,11 +114,16 @@ def create_blog_post(til_file_path, content):
     # Generate description (first 150 chars of content, or title)
     content_preview = content.strip().split("\n\n")[0]
     content_preview = re.sub(r'[#*`\[\]]', '', content_preview)  # Remove markdown syntax
+    # Replace newlines with spaces to ensure single-line description
+    content_preview = content_preview.replace("\n", " ")
     description = content_preview[:150].strip()
     if len(content_preview) > 150:
         description += "..."
     if not description:
         description = title
+
+    # Escape quotes in description for YAML
+    description = description.replace('"', '\\"')
 
     # Use current date for new posts (will be updated with git date extraction in workflow)
     today = datetime.now().strftime("%Y-%m-%d")
@@ -128,7 +133,7 @@ def create_blog_post(til_file_path, content):
 layout: post
 title: "TIL: {title}"
 date: {today} 12:00:00
-description: {description}
+description: "{description}"
 tags: til {category}
 categories: til
 til_source: https://github.com/{TIL_REPO}/blob/{TIL_BRANCH}/{til_file_path}
