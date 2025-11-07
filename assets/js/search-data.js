@@ -30,7 +30,29 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/cv/";
           },
-        },{id: "post-welcome-to-my-blog",
+        },{id: "post-",
+        
+          title: "",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/2025-11-07-til-windsurf-open-remote-cmd/";
+          
+        },
+      },{id: "post-",
+        
+          title: "",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/2025-11-07-til-raycast-rcsb-quicklinks/";
+          
+        },
+      },{id: "post-welcome-to-my-blog",
         
           title: "Welcome to My Blog",
         
