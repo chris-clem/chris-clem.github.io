@@ -111,29 +111,19 @@ def create_blog_post(til_file_path, content):
     # Convert image paths
     content = convert_image_paths(content, til_file_path)
 
-    # Generate description (first 150 chars of content, or title)
-    content_preview = content.strip().split("\n\n")[0]
-    content_preview = re.sub(r'[#*`\[\]]', '', content_preview)  # Remove markdown syntax
-    # Replace newlines with spaces to ensure single-line description
-    content_preview = content_preview.replace("\n", " ")
-    description = content_preview[:150].strip()
-    if len(content_preview) > 150:
-        description += "..."
-    if not description:
-        description = title
-
-    # Escape quotes in description for YAML
-    description = description.replace('"', '\\"')
+    # Generate simple description from title
+    # Keep it simple to avoid YAML parsing issues
+    description = f"A quick tip about {category}"
 
     # Use current date for new posts (will be updated with git date extraction in workflow)
     today = datetime.now().strftime("%Y-%m-%d")
 
-    # Create Jekyll front matter
+    # Create Jekyll front matter - use single quotes for title to avoid escaping issues
     front_matter = f"""---
 layout: post
-title: "TIL: {title}"
+title: 'TIL: {title}'
 date: {today} 12:00:00
-description: "{description}"
+description: {description}
 tags: til {category}
 categories: til
 til_source: https://github.com/{TIL_REPO}/blob/{TIL_BRANCH}/{til_file_path}
