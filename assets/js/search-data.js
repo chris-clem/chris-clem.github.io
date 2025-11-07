@@ -30,37 +30,26 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/cv/";
           },
-        },{id: "post-",
+        },{id: "post-til-quickly-open-remote-dirs-in-windsurf",
         
-          title: "",
+          title: "TIL: Quickly open remote dirs in Windsurf",
         
-        description: "",
+        description: "A quick tip about windsurf",
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2025/2025-11-07-til-windsurf-open-remote-cmd/";
+            window.location.href = "/blog/2025/til-windsurf-open-remote-cmd/";
           
         },
-      },{id: "post-",
+      },{id: "post-til-use-raycast-quicklinks-to-open-rcsb-pdb-3d-viewer",
         
-          title: "",
+          title: "TIL: Use Raycast Quicklinks to open RCSB PDB 3D Viewer",
         
-        description: "",
+        description: "A quick tip about raycast",
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2025/2025-11-07-til-raycast-rcsb-quicklinks/";
-          
-        },
-      },{id: "post-welcome-to-my-blog",
-        
-          title: "Welcome to My Blog",
-        
-        description: "A brief introduction to my personal website",
-        section: "Posts",
-        handler: () => {
-          
-            window.location.href = "/blog/2025/welcome/";
+            window.location.href = "/blog/2025/til-raycast-rcsb-quicklinks/";
           
         },
       },{
