@@ -2,10 +2,7 @@
 layout: post
 title: "TIL: Use Raycast Quicklinks to open RCSB PDB 3D Viewer"
 date: 2025-11-07 12:00:00
-description: 1. Create a Raycast Quicklink(https://www.raycast.com/core-features/quicklinks) with the following content:
-
-Name: RCSB Structure
-Link: https://www2.r...
+description: "1. Create a Raycast Quicklink(https://www.raycast.com/core-features/quicklinks) with the following content:  Name: RCSB Structure Link: https://www2.r..."
 tags: til raycast
 categories: til
 til_source: https://github.com/chris-clem/til/blob/main/raycast/rcsb-quicklinks.md
