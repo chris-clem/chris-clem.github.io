@@ -49,6 +49,31 @@ def fetch_file_content(file_path):
     return response.text
 
 
+def get_file_creation_date(file_path):
+    """Get the creation date of a file from git history."""
+    url = f"{GITHUB_API_BASE}/repos/{TIL_REPO}/commits"
+    params = {
+        "path": file_path,
+        "sha": TIL_BRANCH,
+        "per_page": 100  # Get all commits to find the earliest
+    }
+    response = requests.get(url, params=params)
+    response.raise_for_status()
+
+    commits = response.json()
+    if not commits:
+        # Fallback to today's date if no commits found
+        return datetime.now()
+
+    # Get the earliest commit (last in the list)
+    earliest_commit = commits[-1]
+    date_str = earliest_commit["commit"]["author"]["date"]
+
+    # Parse ISO 8601 format: 2025-11-07T12:34:56Z
+    creation_date = datetime.strptime(date_str, "%Y-%m-%dT%H:%M:%SZ")
+    return creation_date
+
+
 def extract_title_from_content(content):
     """Extract title from markdown content (first # heading or filename)."""
     lines = content.split("\n")
@@ -91,7 +116,7 @@ def convert_image_paths(content, til_file_path):
     return content
 
 
-def create_blog_post(til_file_path, content):
+def create_blog_post(til_file_path, content, creation_date):
     """Convert TIL content to Jekyll blog post format."""
     # Extract metadata
     category = Path(til_file_path).parent.name
@@ -115,14 +140,14 @@ def create_blog_post(til_file_path, content):
     # Keep it simple to avoid YAML parsing issues
     description = f"A quick tip about {category}"
 
-    # Use current date for new posts (will be updated with git date extraction in workflow)
-    today = datetime.now().strftime("%Y-%m-%d")
+    # Use the file's git creation date
+    date_str = creation_date.strftime("%Y-%m-%d")
 
     # Create Jekyll front matter - use single quotes for title to avoid escaping issues
     front_matter = f"""---
 layout: post
 title: 'TIL: {title}'
-date: {today} 12:00:00
+date: {date_str} 12:00:00
 description: {description}
 tags: til {category}
 categories: til
@@ -134,7 +159,7 @@ til_source: https://github.com/{TIL_REPO}/blob/{TIL_BRANCH}/{til_file_path}
     blog_post = front_matter + content
 
     # Generate filename: YYYY-MM-DD-til-category-filename.md
-    post_filename = f"{today}-til-{category}-{filename}.md"
+    post_filename = f"{date_str}-til-{category}-{filename}.md"
     post_path = Path(POSTS_DIR) / post_filename
 
     return post_path, blog_post
@@ -158,8 +183,12 @@ def sync_til_posts():
         # Fetch content
         content = fetch_file_content(til_file)
 
+        # Get creation date from git history
+        creation_date = get_file_creation_date(til_file)
+        print(f"  Creation date: {creation_date.strftime('%Y-%m-%d')}")
+
         # Create blog post
-        post_path, blog_post = create_blog_post(til_file, content)
+        post_path, blog_post = create_blog_post(til_file, content, creation_date)
 
         # Check if post already exists
         exists = post_path.exists()
