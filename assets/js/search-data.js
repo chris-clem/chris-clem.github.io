@@ -30,7 +30,117 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/cv/";
           },
-        },{
+        },{id: "post-til-multi-node-gpu-training-with-skypilot-and-pytorch-lightning",
+        
+          title: "TIL: Multi-node GPU training with SkyPilot and PyTorch Lightning",
+        
+        description: "A quick tip about skypilot",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/til-skypilot-multi-node-gpu-training/";
+          
+        },
+      },{id: "post-til-request-gcp-quota-increase",
+        
+          title: "TIL: Request GCP quota increase",
+        
+        description: "A quick tip about gcp",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/til-gcp-request-gcp-quota-increase/";
+          
+        },
+      },{id: "post-til-useful-datamol-functions",
+        
+          title: "TIL: Useful Datamol functions",
+        
+        description: "A quick tip about datamol",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/til-datamol-useful-datamol-functions/";
+          
+        },
+      },{id: "post-til-template-data-processing-script-with-pathlib-fire-joblib-loguru-and-tqdm",
+        
+          title: "TIL: Template data processing script with pathlib, fire, joblib, loguru, and tqdm",
+        
+        description: "A quick tip about python",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/til-python-process-data-script/";
+          
+        },
+      },{id: "post-til-template-data-exploration-jupyter-notebook",
+        
+          title: "TIL: Template data exploration Jupyter notebook",
+        
+        description: "A quick tip about python",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/til-python-explore-data-jupyter-notebook/";
+          
+        },
+      },{id: "post-til-useful-skypilot-commands",
+        
+          title: "TIL: Useful SkyPilot Commands",
+        
+        description: "A quick tip about skypilot",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/til-skypilot-useful-skypilot-commands/";
+          
+        },
+      },{id: "post-til-fix-missing-terminal-error-message",
+        
+          title: "TIL: Fix missing terminal error message",
+        
+        description: "A quick tip about ghostty",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/til-ghostty-fix-missing-terminal/";
+          
+        },
+      },{id: "post-til-manage-gcp-buckets",
+        
+          title: "TIL: Manage GCP Buckets",
+        
+        description: "A quick tip about gcp",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/til-gcp-manage-gcp-buckets/";
+          
+        },
+      },{id: "post-til-quickly-open-remote-dirs-in-windsurf",
+        
+          title: "TIL: Quickly open remote dirs in Windsurf",
+        
+        description: "A quick tip about windsurf",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/til-windsurf-open-remote-cmd/";
+          
+        },
+      },{id: "post-til-use-raycast-quicklinks-to-open-rcsb-pdb-3d-viewer",
+        
+          title: "TIL: Use Raycast Quicklinks to open RCSB PDB 3D Viewer",
+        
+        description: "A quick tip about raycast",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/til-raycast-rcsb-quicklinks/";
+          
+        },
+      },{
         id: 'social-email',
         title: 'email',
         section: 'Socials',
