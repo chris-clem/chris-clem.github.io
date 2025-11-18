@@ -40,7 +40,11 @@ term.open(document.getElementById('terminal'));
 let currentLine = '';
 let commandHistory = [];
 let historyIndex = -1;
-const prompt = '\x1b[32mguest\x1b[0m:\x1b[34m~\x1b[0m$ ';
+
+// Dynamic prompt based on current directory
+function getPrompt() {
+  return `\x1b[32mguest\x1b[0m:\x1b[34m${currentDir}\x1b[0m$ `;
+}
 
 // ASCII Art banner - kept simple for proper rendering
 const banner = `\x1b[1m\x1b[36m
@@ -55,6 +59,341 @@ const banner = `\x1b[1m\x1b[36m
 \x1b[90mType '\x1b[37mhelp\x1b[90m' to see available commands or '\x1b[37mclear\x1b[90m' to clear the screen.\x1b[0m
 
 `;
+
+// Blog posts data
+const blogPosts = {
+  'raycast-quicklinks.md': {
+    title: 'TIL: Use Raycast Quicklinks to open RCSB PDB 3D Viewer',
+    date: '2025-11-07',
+    tags: ['raycast'],
+    content: `# TIL: Use Raycast Quicklinks to open RCSB PDB 3D Viewer
+
+1. Create a Raycast Quicklink with the following content:
+
+   Name: RCSB Structure
+   Link: https://www2.rcsb.org/3d-view/{clipboard}
+
+2. With it, copy a PDB ID, e.g. from the terminal, and use the
+   Quicklink to open the RCSB PDB 3D Viewer.
+
+3. Open Raycast, search for the Quicklink "RCSB Structure", and
+   hit enter.
+
+4. https://www2.rcsb.org/3d-view/2GEU opens in your browser.
+
+5. Repeat with "https://www.rcsb.org/ligand/{clipboard}" for RCSB
+   Ligand Viewer Quicklink where a CCD code is copied to clipboard.`
+  },
+  'windsurf-remote.md': {
+    title: 'TIL: Quickly open remote dirs in Windsurf',
+    date: '2025-11-07',
+    tags: ['windsurf'],
+    content: `# TIL: Quickly open remote dirs in Windsurf
+
+Access remote dirs in Windsurf with the following command:
+
+windsurf --folder-uri vscode-remote://ssh-remote+<remote-host>/home/user/<path>`
+  },
+  'gcp-buckets.md': {
+    title: 'TIL: Manage GCP Buckets',
+    date: '2025-11-10',
+    tags: ['gcp'],
+    content: `# TIL: Manage GCP Buckets
+
+## Create bucket
+gcloud storage buckets create gs://$BUCKET_NAME
+
+## Transfer files to bucket
+gcloud storage rsync -r ./local_dir gs://$BUCKET_NAME
+
+## List buckets
+gcloud storage ls`
+  },
+  'ghostty-terminfo.md': {
+    title: 'TIL: Fix missing terminal error message',
+    date: '2025-11-10',
+    tags: ['ghostty'],
+    content: `# TIL: Fix missing terminal error message
+
+https://ghostty.org/docs/help/terminfo
+
+## Copy Ghostty terminfo to remote server
+infocmp -x xterm-ghostty | ssh YOUR-SERVER -- tic -x -`
+  },
+  'skypilot-commands.md': {
+    title: 'TIL: Useful SkyPilot Commands',
+    date: '2025-11-10',
+    tags: ['skypilot'],
+    content: `# TIL: Useful SkyPilot Commands
+
+## Installation
+uv tool install --with pip "skypilot[gcp]"
+
+## Common commands
+
+### Check to verify cloud access
+sky check gcp
+
+### Status to see all clusters
+sky status
+
+### Dashboard for a nicer UI
+sky dashboard
+
+## Development Cluster
+
+### Launch cluster with L4 GPU and 5 hours autostop
+sky launch -c dev --gpus L4 --workdir . -i 300
+
+### SSH into cluster
+ssh dev
+
+### Stop/ Terminate a cluster
+sky [stop/down] dev # down to terminate`
+  },
+  'jupyter-template.md': {
+    title: 'TIL: Template data exploration Jupyter notebook',
+    date: '2025-11-11',
+    tags: ['python'],
+    content: `# TIL: Template data exploration Jupyter notebook
+
+Template Jupyter notebook for exploring data.
+I have added it as a Raycast snippet @notebook
+
+In VSCode/Windsurf/Cursor, create a new file called
+explore_data.txt and copy the JSON content, then rename
+it to explore_data.ipynb.
+
+Includes cells for:
+- Imports (pathlib, matplotlib, numpy, pandas, seaborn)
+- Paths & Settings (DATA_DIR)
+- Load Data (pd.read_csv)`
+  },
+  'python-script-template.md': {
+    title: 'TIL: Template data processing script',
+    date: '2025-11-11',
+    tags: ['python'],
+    content: `# TIL: Template data processing script
+
+Template script for processing data with common packages.
+I have added it as a Raycast snippet @script
+
+Uses:
+- pathlib for file paths
+- fire for CLI arguments
+- joblib for parallel processing
+- loguru for logging
+- tqdm for progress bars
+
+Example usage:
+python process.py --n_jobs 4`
+  },
+  'datamol-functions.md': {
+    title: 'TIL: Useful Datamol functions',
+    date: '2025-11-12',
+    tags: ['datamol'],
+    content: `# TIL: Useful Datamol functions
+
+https://docs.datamol.io/stable/index.html
+
+import datamol as dm
+
+## Cluster molecules using butina algorithm
+dm.cluster.cluster_mols(mols, cutoff=0.2)
+
+## Compute conformers
+dm.conformers.generate(mol, ...)
+
+## Convert mols to dataframe
+dm.convert.to_df(mols)
+
+## Compute molecular properties
+dm.descriptors.compute_many_descriptors(mol)
+
+## Compute fingerprints
+dm.fp.to_fp(mol, as_array=True, fp_type='ecfp')
+
+## Fragment molecule
+dm.fragment.frag(mol)
+
+## Read/Write SDF files
+dm.io.read_sdf(urlpath)
+dm.io.to_sdf(mols, urlpath)
+
+## Disable RDKit logs
+with dm.log.without_rdkit_log():
+    mol = dm.to_mol("CCCCO")
+
+## Standardize molecule
+mol = dm.mol.to_mol("O=C(C)Oc1ccccc1C(=O)O")
+mol = dm.mol.fix_mol(mol)
+mol = dm.mol.sanitize_mol(mol)
+mol = dm.mol.standardize_mol(mol)
+
+## Generate image
+dm.viz.to_image(mols, legends)`
+  },
+  'gcp-quota.md': {
+    title: 'TIL: Request GCP quota increase',
+    date: '2025-11-13',
+    tags: ['gcp'],
+    content: `# TIL: Request GCP quota increase
+
+1. Go to the Quota page in Google Cloud Console
+2. Click Filter and select Service: Compute Engine API
+3. For H100 GPUs: choose metric: GPUS_PER_GPU_FAMILY
+   and select dimension gpu_family: NVIDIA_H100
+4. For other GPUs: choose Limit Name: instance_name
+   (e.g., NVIDIA-V100-GPUS-per-project-region)
+5. Select the checkbox of the region
+6. Click Edit Quotas and fill out the new limit
+7. Click Submit Request`
+  },
+  'skypilot-multinode.md': {
+    title: 'TIL: Multi-node GPU training with SkyPilot',
+    date: '2025-11-13',
+    tags: ['skypilot', 'pytorch'],
+    content: `# TIL: Multi-node GPU training with SkyPilot
+
+## 1. Configure PyTorch Lightning Trainer
+trainer = Trainer(
+    accelerator="gpu",
+    devices=8,
+    num_nodes=8,
+    strategy="ddp"
+)
+
+## 2. Launch SkyPilot cluster
+sky launch -c train train.yaml
+
+## SkyPilot config (train.yaml):
+resources:
+    accelerators: H100:8
+    disks: 1TB
+
+num_nodes: 8
+
+run: |
+    MASTER_ADDR=$(echo "$SKYPILOT_NODE_IPS" | head -n1)
+    torchrun \\
+    --nnodes=$SKYPILOT_NUM_NODES \\
+    --nproc_per_node=$SKYPILOT_NUM_GPUS_PER_NODE \\
+    --master_addr=$MASTER_ADDR \\
+    --master_port=8008 \\
+    --node_rank=\${SKYPILOT_NODE_RANK} \\
+    train.py`
+  },
+  'python-project-template.md': {
+    title: 'TIL: Python Template Project',
+    date: '2025-11-14',
+    tags: ['python', 'uv'],
+    content: `# TIL: Python Template Project
+
+## 1. Initialize project as a uv packaged application
+uv init --package project-name
+
+## 2. Create venv by running it
+cd project-name
+uv run project-name
+
+## 3. Add dependencies
+uv add fire joblib loguru tqdm
+
+## 4. Add pre-commit hooks
+Create .pre-commit-config.yaml with:
+- pre-commit-hooks (check-ast, check-json, etc.)
+- ruff-pre-commit (ruff-check, ruff-format)
+
+Install:
+uv add --dev pre-commit
+uv run pre-commit install
+
+Run on all files:
+git add .
+uv run pre-commit run --all-files
+git commit -m "Initial commit"`
+  }
+};
+
+// Projects data
+const projects = {
+  'README.md': {
+    title: 'Projects',
+    status: 'Coming Soon',
+    tags: ['placeholder'],
+    content: `# Projects
+
+Coming soon...
+
+Check back later for detailed write-ups of research projects
+in medical imaging, deep learning, and AI drug discovery.
+
+In the meantime, feel free to explore the blog posts or publications!`
+  }
+};
+
+// Publications data
+const publications = {
+  'ct-free-pet-segmentation.md': {
+    title: 'CT-free Total-Body PET Segmentation',
+    year: '2024',
+    venue: 'Medical Image Analysis',
+    content: `# CT-free Total-Body PET Segmentation
+
+## Abstract
+Novel deep learning approach for anatomical segmentation
+of PET images without requiring CT scans, reducing
+radiation exposure for patients.
+
+## Key Contributions
+- Developed synthetic CT generation from PET
+- Multi-organ segmentation network
+- Validated on total-body PET scanner data
+
+## Citation
+Clement et al., Medical Image Analysis, 2024`
+  },
+  'organ-on-chip-imaging.md': {
+    title: 'High-Resolution Organ-on-Chip Imaging',
+    year: '2023',
+    venue: 'Lab on a Chip',
+    content: `# High-Resolution Organ-on-Chip Imaging
+
+## Abstract
+Novel imaging pipeline for micro-physiological systems
+enabling real-time monitoring of organ-on-chip devices.
+
+## Key Contributions
+- Custom microscopy setup for 3D imaging
+- Deep learning-based image enhancement
+- Automated cell tracking and analysis
+
+## Citation
+Clement et al., Lab on a Chip, 2023`
+  },
+  'pet-reconstruction.md': {
+    title: 'Deep Learning PET Reconstruction',
+    year: '2022',
+    venue: 'IEEE TMI',
+    content: `# Deep Learning for PET Image Reconstruction
+
+## Abstract
+End-to-end deep learning approach for PET image
+reconstruction with improved noise reduction and
+resolution recovery.
+
+## Key Contributions
+- Unrolled optimization network architecture
+- Physics-informed neural network design
+- Clinical validation study
+
+## Citation
+Clement et al., IEEE Trans. Medical Imaging, 2022`
+  }
+};
+
+// Current directory for filesystem simulation
+let currentDir = '~';
 
 // Command definitions
 const commands = {
@@ -71,7 +410,6 @@ const commands = {
   \x1b[32mresearch\x1b[0m             Research interests and publications
   \x1b[32mskills\x1b[0m               Technical skills and expertise
   \x1b[32mprojects\x1b[0m             View projects and portfolio
-  \x1b[32mblog\x1b[0m                 Read blog posts
   \x1b[32mcontact\x1b[0m              Get contact information
   \x1b[32msocial\x1b[0m               Social media links
   \x1b[32mcv\x1b[0m                   View CV/Resume
@@ -80,7 +418,18 @@ const commands = {
   \x1b[32mclear\x1b[0m                Clear the terminal
   \x1b[32mexit\x1b[0m                 Leave terminal mode
 
-\x1b[90mTip: Try tab completion or use arrow keys for command history!\x1b[0m
+\x1b[1mFilesystem Commands:\x1b[0m
+  \x1b[32mls\x1b[0m                   List directory contents
+  \x1b[32mcd [dir]\x1b[0m             Change directory
+  \x1b[32mcat [file]\x1b[0m           View file contents
+  \x1b[32mpwd\x1b[0m                  Print working directory
+
+\x1b[1mDirectories:\x1b[0m
+  \x1b[34mblog/\x1b[0m                TIL posts (Today I Learned)
+  \x1b[34mprojects/\x1b[0m            Research & work projects
+  \x1b[34mpublications/\x1b[0m        Academic publications
+
+\x1b[90mTip: Try 'ls' then 'cd blog' then 'cat skypilot-commands.md'\x1b[0m
 `;
     }
   },
@@ -284,20 +633,22 @@ To view my full project portfolio, visit:
   blog: {
     description: 'Read blog posts',
     execute: () => {
-      window.open('https://chris-clem.github.io/blog/', '_blank');
-      return `
-\x1b[1m\x1b[36m📝 Blog\x1b[0m
+      // List blog posts
+      const files = Object.keys(blogPosts).sort();
+      let output = `
+\x1b[1m\x1b[36m📝 Blog Posts (TIL - Today I Learned)\x1b[0m
 
-Visit my blog for insights on:
-  • Machine Learning
-  • Medical Imaging
-  • AI Drug Discovery
-  • Research Updates
-
-  \x1b[36mhttps://chris-clem.github.io/blog/\x1b[0m
-
-\x1b[90mOpening in new tab...\x1b[0m
 `;
+      files.forEach(file => {
+        const post = blogPosts[file];
+        output += `  \x1b[36m${file}\x1b[0m\n`;
+        output += `    \x1b[90m${post.date} - ${post.title}\x1b[0m\n\n`;
+      });
+      output += `\x1b[32mRead a post:\x1b[0m cat blog/<filename>
+\x1b[32mOr navigate:\x1b[0m cd blog && ls && cat <filename>
+
+\x1b[90mFor more posts, visit: https://chris-clem.github.io/blog/\x1b[0m`;
+      return output;
     }
   },
 
@@ -416,22 +767,161 @@ ${randomFact}
   },
 
   ls: {
-    description: 'List files (Easter egg)',
-    execute: () => {
-      return `
-\x1b[36mabout.txt\x1b[0m      \x1b[36meducation.txt\x1b[0m   \x1b[36mresearch.txt\x1b[0m
-\x1b[36mwork.txt\x1b[0m       \x1b[36mprojects.txt\x1b[0m    \x1b[36mcv.pdf\x1b[0m
-\x1b[36mskills.txt\x1b[0m     \x1b[36mcontact.txt\x1b[0m     \x1b[32msecret.sh\x1b[0m
+    description: 'List directory contents',
+    execute: (args) => {
+      const target = args[0] || currentDir;
 
-\x1b[90mHint: These aren't real files, try the actual commands instead!\x1b[0m
+      if (currentDir === '~' && !args[0]) {
+        return `
+\x1b[34mblog/\x1b[0m          \x1b[34mprojects/\x1b[0m       \x1b[34mpublications/\x1b[0m
+\x1b[36mREADME.md\x1b[0m      \x1b[36mcontact.txt\x1b[0m
+
+\x1b[90mTip: Try 'cd blog', 'cd projects', or 'cd publications'\x1b[0m
 `;
+      } else if (currentDir === '~/blog' || target === 'blog' || target === '~/blog') {
+        // List blog posts
+        const files = Object.keys(blogPosts).sort();
+        let output = '\n';
+        files.forEach(file => {
+          const post = blogPosts[file];
+          output += `\x1b[36m${file}\x1b[0m\n`;
+          output += `  \x1b[90m${post.date} - ${post.title}\x1b[0m\n`;
+        });
+        output += `\n\x1b[90mUse 'cat <filename>' to read a post\x1b[0m\n`;
+        return output;
+      } else if (currentDir === '~/projects' || target === 'projects' || target === '~/projects') {
+        // List projects
+        const files = Object.keys(projects).sort();
+        let output = '\n';
+        files.forEach(file => {
+          const project = projects[file];
+          output += `\x1b[36m${file}\x1b[0m\n`;
+          output += `  \x1b[90m[${project.status}] ${project.title}\x1b[0m\n`;
+        });
+        output += `\n\x1b[90mUse 'cat <filename>' to read about a project\x1b[0m\n`;
+        return output;
+      } else if (currentDir === '~/publications' || target === 'publications' || target === '~/publications') {
+        // List publications
+        const files = Object.keys(publications).sort();
+        let output = '\n';
+        files.forEach(file => {
+          const pub = publications[file];
+          output += `\x1b[36m${file}\x1b[0m\n`;
+          output += `  \x1b[90m${pub.year} - ${pub.title}\x1b[0m\n`;
+        });
+        output += `\n\x1b[90mUse 'cat <filename>' to read a publication\x1b[0m\n`;
+        return output;
+      }
+
+      return `\x1b[31mls: cannot access '${target}': No such directory\x1b[0m`;
+    }
+  },
+
+  cd: {
+    description: 'Change directory',
+    execute: (args) => {
+      const target = args[0];
+
+      if (!target || target === '~') {
+        currentDir = '~';
+        return '';
+      } else if (target === '..') {
+        currentDir = '~';
+        return '';
+      } else if (target === 'blog' || target === '~/blog') {
+        currentDir = '~/blog';
+        return '';
+      } else if (target === 'projects' || target === '~/projects') {
+        currentDir = '~/projects';
+        return '';
+      } else if (target === 'publications' || target === '~/publications') {
+        currentDir = '~/publications';
+        return '';
+      } else {
+        return `\x1b[31mcd: no such directory: ${target}\x1b[0m`;
+      }
+    }
+  },
+
+  cat: {
+    description: 'View file contents',
+    execute: (args) => {
+      if (!args[0]) {
+        return `\x1b[31mcat: missing file operand\x1b[0m\nUsage: cat <filename>`;
+      }
+
+      let filename = args[0];
+      let targetDir = currentDir;
+
+      // Handle paths like blog/filename.md, projects/filename.md, etc.
+      if (filename.startsWith('blog/')) {
+        filename = filename.replace('blog/', '');
+        targetDir = '~/blog';
+      } else if (filename.startsWith('projects/')) {
+        filename = filename.replace('projects/', '');
+        targetDir = '~/projects';
+      } else if (filename.startsWith('publications/')) {
+        filename = filename.replace('publications/', '');
+        targetDir = '~/publications';
+      }
+
+      // Check based on current/target directory
+      if (targetDir === '~/blog' || currentDir === '~/blog') {
+        if (blogPosts[filename]) {
+          const post = blogPosts[filename];
+          const now = new Date().toISOString().replace('T', ' ').slice(0, 19);
+          return `
+\x1b[90m[${now}] cat ${args[0]}\x1b[0m
+
+\x1b[1m\x1b[33m${post.title}\x1b[0m
+\x1b[90mDate: ${post.date} | Tags: ${post.tags.join(', ')}\x1b[0m
+\x1b[90m${'─'.repeat(50)}\x1b[0m
+
+${post.content}
+`;
+        }
+      }
+
+      if (targetDir === '~/projects' || currentDir === '~/projects') {
+        if (projects[filename]) {
+          const project = projects[filename];
+          const now = new Date().toISOString().replace('T', ' ').slice(0, 19);
+          return `
+\x1b[90m[${now}] cat ${args[0]}\x1b[0m
+
+\x1b[1m\x1b[33m${project.title}\x1b[0m
+\x1b[90mStatus: ${project.status} | Tags: ${project.tags.join(', ')}\x1b[0m
+\x1b[90m${'─'.repeat(50)}\x1b[0m
+
+${project.content}
+`;
+        }
+      }
+
+      if (targetDir === '~/publications' || currentDir === '~/publications') {
+        if (publications[filename]) {
+          const pub = publications[filename];
+          const now = new Date().toISOString().replace('T', ' ').slice(0, 19);
+          return `
+\x1b[90m[${now}] cat ${args[0]}\x1b[0m
+
+\x1b[1m\x1b[33m${pub.title}\x1b[0m
+\x1b[90mYear: ${pub.year} | Venue: ${pub.venue}\x1b[0m
+\x1b[90m${'─'.repeat(50)}\x1b[0m
+
+${pub.content}
+`;
+        }
+      }
+
+      return `\x1b[31mcat: ${args[0]}: No such file or directory\x1b[0m`;
     }
   },
 
   pwd: {
-    description: 'Print working directory (Easter egg)',
+    description: 'Print working directory',
     execute: () => {
-      return '/home/christoph/terminal';
+      return `/home/christoph${currentDir.replace('~', '')}`;
     }
   },
 
@@ -446,7 +936,7 @@ ${randomFact}
 \x1b[90m(Just kidding! Type 'help' for available commands)\x1b[0m
 `;
       }
-      return `\x1b[31m[sudo]\x1b[0m Nice try! But you don't have sudo access here 😄`;
+      return `\x1b[31m[sudo]\x1b[0m Nice try! But you don't have sudo access here`;
     }
   }
 };
@@ -496,7 +986,7 @@ term.onKey(({ key, domEvent }) => {
       }
 
       currentLine = '';
-      write(prompt);
+      write(getPrompt());
     } else if (code === 8) { // Backspace
       if (currentLine.length > 0) {
         currentLine = currentLine.slice(0, -1);
@@ -544,10 +1034,10 @@ term.onKey(({ key, domEvent }) => {
     if (code === 67) { // Ctrl+C
       writeln('^C');
       currentLine = '';
-      write(prompt);
+      write(getPrompt());
     } else if (code === 76) { // Ctrl+L
       term.clear();
-      write(prompt);
+      write(getPrompt());
     }
   }
 });
@@ -559,7 +1049,7 @@ function initTerminal() {
 
   // Write banner and prompt
   term.writeln(banner);
-  term.write(prompt);
+  term.write(getPrompt());
 
   // Focus terminal
   term.focus();
