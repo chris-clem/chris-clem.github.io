@@ -20,12 +20,15 @@ body {
   display: flex;
   flex-direction: column;
   background-color: #0c0c0c;
+  overflow: hidden;
 }
 
 #terminal {
   flex: 1;
   padding: 20px;
-  overflow: auto;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
 }
 
 /* XTerm.js customization */
@@ -86,6 +89,7 @@ body {
   left: 0;
   top: 0;
   bottom: 0;
+  scrollbar-width: thin;
 }
 
 .xterm .xterm-screen {
