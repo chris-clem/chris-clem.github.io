@@ -3,6 +3,9 @@ const term = new Terminal({
   cursorBlink: true,
   fontFamily: '"Cascadia Code", Menlo, monospace',
   fontSize: 14,
+  cols: 80,
+  rows: 24,
+  scrollback: 1000,
   theme: {
     background: '#0c0c0c',
     foreground: '#cccccc',
@@ -33,7 +36,6 @@ term.loadAddon(fitAddon);
 term.loadAddon(new WebLinksAddon.WebLinksAddon());
 
 term.open(document.getElementById('terminal'));
-fitAddon.fit();
 
 // Terminal state
 let currentLine = '';
@@ -43,27 +45,18 @@ const prompt = '\x1b[32mguest\x1b[0m:\x1b[34m~\x1b[0m$ ';
 
 // ASCII Art banner
 const banner = `
-\x1b[36m
-╔═══════════════════════════════════════════════════════════════════════════╗
-║                                                                           ║
-║   ██████╗██╗  ██╗██████╗ ██╗███████╗████████╗ ██████╗ ██████╗ ██╗  ██╗  ║
-║  ██╔════╝██║  ██║██╔══██╗██║██╔════╝╚══██╔══╝██╔═══██╗██╔══██╗██║  ██║  ║
-║  ██║     ███████║██████╔╝██║███████╗   ██║   ██║   ██║██████╔╝███████║  ║
-║  ██║     ██╔══██║██╔══██╗██║╚════██║   ██║   ██║   ██║██╔═══╝ ██╔══██║  ║
-║  ╚██████╗██║  ██║██║  ██║██║███████║   ██║   ╚██████╔╝██║     ██║  ██║  ║
-║   ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝╚══════╝   ╚═╝    ╚═════╝ ╚═╝     ╚═╝  ╚═╝  ║
-║                                                                           ║
-║              ██████╗██╗     ███████╗███╗   ███╗███████╗███╗   ██╗████████╗║
-║             ██╔════╝██║     ██╔════╝████╗ ████║██╔════╝████╗  ██║╚══██╔══╝║
-║             ██║     ██║     █████╗  ██╔████╔██║█████╗  ██╔██╗ ██║   ██║   ║
-║             ██║     ██║     ██╔══╝  ██║╚██╔╝██║██╔══╝  ██║╚██╗██║   ██║   ║
-║             ╚██████╗███████╗███████╗██║ ╚═╝ ██║███████╗██║ ╚████║   ██║   ║
-║              ╚═════╝╚══════╝╚══════╝╚═╝     ╚═╝╚══════╝╚═╝  ╚═══╝   ╚═╝   ║
-║                                                                           ║
-╚═══════════════════════════════════════════════════════════════════════════╝
-\x1b[0m
+\x1b[36m┌────────────────────────────────────────────────────┐
+│                                                    │
+│   ╔═╗╦ ╦╦═╗╦╔═╗╔╦╗╔═╗╔═╗╦ ╦  ╔═╗╦  ╔═╗╔╦╗╔═╗╔╗╔╔╦╗  │
+│   ║  ╠═╣╠╦╝║╚═╗ ║ ║ ║╠═╝╠═╣  ║  ║  ║╣ ║║║║╣ ║║║ ║   │
+│   ╚═╝╩ ╩╩╚═╩╚═╝ ╩ ╚═╝╩  ╩ ╩  ╚═╝╩═╝╚═╝╩ ╩╚═╝╝╚╝ ╩   │
+│                                                    │
+│   Machine Learning Engineer | AI Drug Discovery   │
+│   PhD Biomedical Engineering | Harvard Researcher │
+│                                                    │
+└────────────────────────────────────────────────────┘\x1b[0m
 
-\x1b[33mWelcome to Christoph's interactive terminal!\x1b[0m
+\x1b[1m\x1b[33mWelcome to Christoph's interactive terminal!\x1b[0m
 \x1b[90mType '\x1b[37mhelp\x1b[90m' to see available commands or '\x1b[37mclear\x1b[90m' to clear the screen.\x1b[0m
 
 `;
@@ -564,14 +557,31 @@ term.onKey(({ key, domEvent }) => {
   }
 });
 
-// Handle window resize
+// Handle window resize with debounce
+let resizeTimeout;
 window.addEventListener('resize', () => {
-  fitAddon.fit();
+  clearTimeout(resizeTimeout);
+  resizeTimeout = setTimeout(() => {
+    fitAddon.fit();
+  }, 100);
 });
 
-// Initialize terminal
-write(banner);
-write(prompt);
+// Initialize terminal with proper fitting
+function initTerminal() {
+  // Fit terminal to window
+  setTimeout(() => {
+    fitAddon.fit();
+    // Write banner and prompt after fitting
+    write(banner);
+    write(prompt);
+    // Focus terminal
+    term.focus();
+  }, 100);
+}
 
-// Focus terminal
-term.focus();
+// Wait for DOM to be ready
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initTerminal);
+} else {
+  initTerminal();
+}
