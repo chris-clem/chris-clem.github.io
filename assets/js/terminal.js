@@ -317,26 +317,6 @@ git commit -m "Initial commit"`
 
 // Projects data
 const projects = {
-  'khumbu-drug-discovery.md': {
-    title: 'AI Drug Discovery Platform',
-    status: 'Active',
-    tags: ['ML', 'Drug Discovery', 'Python'],
-    content: `# AI Drug Discovery Platform @ Khumbu
-
-Building cutting-edge ML models for drug discovery with focus on diabetes.
-
-## Key Technologies
-- PyTorch for deep learning models
-- Molecular property prediction
-- Drug-target interaction modeling
-- Generative models for molecule design
-
-## Impact
-Accelerating the drug discovery pipeline from years to months
-using AI-driven approaches.
-
-Website: https://www.khumbu.ai/`
-  },
   'pet-foundation-models.md': {
     title: 'PET Foundation Models',
     status: 'Research',
