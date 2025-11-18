@@ -1,7 +1,7 @@
 ---
 layout: about
 title: about
-permalink: /
+permalink: /about/
 subtitle: Machine Learning Engineer at <a href='https://www.khumbu.ai/'>Khumbu</a>
 
 profile:
