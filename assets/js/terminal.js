@@ -315,6 +315,144 @@ git commit -m "Initial commit"`
   }
 };
 
+// Projects data
+const projects = {
+  'khumbu-drug-discovery.md': {
+    title: 'AI Drug Discovery Platform',
+    status: 'Active',
+    tags: ['ML', 'Drug Discovery', 'Python'],
+    content: `# AI Drug Discovery Platform @ Khumbu
+
+Building cutting-edge ML models for drug discovery with focus on diabetes.
+
+## Key Technologies
+- PyTorch for deep learning models
+- Molecular property prediction
+- Drug-target interaction modeling
+- Generative models for molecule design
+
+## Impact
+Accelerating the drug discovery pipeline from years to months
+using AI-driven approaches.
+
+Website: https://www.khumbu.ai/`
+  },
+  'pet-foundation-models.md': {
+    title: 'PET Foundation Models',
+    status: 'Research',
+    tags: ['Medical Imaging', 'Foundation Models', 'Harvard'],
+    content: `# PET Foundation Models @ Harvard Medical School
+
+Developing large-scale pre-trained models for PET/CT imaging
+at the Center for Advanced Medical Computing and Analysis (CAMCA).
+
+## Research Goals
+- Self-supervised learning for medical images
+- Transfer learning across imaging modalities
+- Improved diagnostic accuracy with less labeled data
+
+## Collaboration
+Working under supervision of Dr. Quanzheng Li at MGH/Harvard.`
+  },
+  'tau-pet-analysis.md': {
+    title: 'Tau-PET Analysis for Alzheimer\'s',
+    status: 'Completed',
+    tags: ['Neurology', 'PET', 'Deep Learning'],
+    content: `# Tau-PET Brain Scan Analysis
+
+PhD research on interpreting tau-PET brain scans for
+neurodegenerative disease detection.
+
+## Methodology
+- 3D CNN architectures for brain imaging
+- Attention mechanisms for interpretability
+- Multi-task learning for staging
+
+## Outcomes
+- Improved early detection of Alzheimer's disease
+- Automated staging of disease progression
+- Published in peer-reviewed journals`
+  },
+  'deepfake-detection.md': {
+    title: 'Deepfake Detection System',
+    status: 'Completed',
+    tags: ['Computer Vision', 'Security', 'TUM'],
+    content: `# Deepfake Detection @ TUM Visual Computing Group
+
+Developed deepfake detection algorithms in collaboration
+with AI Foundation.
+
+## Approach
+- Face manipulation detection
+- Temporal inconsistency analysis
+- Ensemble methods for robustness
+
+## Impact
+Contributing to media authenticity verification and
+combating misinformation.`
+  }
+};
+
+// Publications data
+const publications = {
+  'ct-free-pet-segmentation.md': {
+    title: 'CT-free Total-Body PET Segmentation',
+    year: '2024',
+    venue: 'Medical Image Analysis',
+    content: `# CT-free Total-Body PET Segmentation
+
+## Abstract
+Novel deep learning approach for anatomical segmentation
+of PET images without requiring CT scans, reducing
+radiation exposure for patients.
+
+## Key Contributions
+- Developed synthetic CT generation from PET
+- Multi-organ segmentation network
+- Validated on total-body PET scanner data
+
+## Citation
+Clement et al., Medical Image Analysis, 2024`
+  },
+  'organ-on-chip-imaging.md': {
+    title: 'High-Resolution Organ-on-Chip Imaging',
+    year: '2023',
+    venue: 'Lab on a Chip',
+    content: `# High-Resolution Organ-on-Chip Imaging
+
+## Abstract
+Novel imaging pipeline for micro-physiological systems
+enabling real-time monitoring of organ-on-chip devices.
+
+## Key Contributions
+- Custom microscopy setup for 3D imaging
+- Deep learning-based image enhancement
+- Automated cell tracking and analysis
+
+## Citation
+Clement et al., Lab on a Chip, 2023`
+  },
+  'pet-reconstruction.md': {
+    title: 'Deep Learning PET Reconstruction',
+    year: '2022',
+    venue: 'IEEE TMI',
+    content: `# Deep Learning for PET Image Reconstruction
+
+## Abstract
+End-to-end deep learning approach for PET image
+reconstruction with improved noise reduction and
+resolution recovery.
+
+## Key Contributions
+- Unrolled optimization network architecture
+- Physics-informed neural network design
+- Clinical validation study
+
+## Citation
+Clement et al., IEEE Trans. Medical Imaging, 2022`
+  }
+};
+
 // Current directory for filesystem simulation
 let currentDir = '~';
 
@@ -343,11 +481,16 @@ const commands = {
 
 \x1b[1mFilesystem Commands:\x1b[0m
   \x1b[32mls\x1b[0m                   List directory contents
-  \x1b[32mcd [dir]\x1b[0m             Change directory (try: cd blog)
-  \x1b[32mcat [file]\x1b[0m           View file contents (try: cat blog/skypilot-commands.md)
+  \x1b[32mcd [dir]\x1b[0m             Change directory
+  \x1b[32mcat [file]\x1b[0m           View file contents
   \x1b[32mpwd\x1b[0m                  Print working directory
 
-\x1b[90mTip: Try 'cd blog' then 'ls' to see blog posts, then 'cat filename.md' to read them!\x1b[0m
+\x1b[1mDirectories:\x1b[0m
+  \x1b[34mblog/\x1b[0m                TIL posts (Today I Learned)
+  \x1b[34mprojects/\x1b[0m            Research & work projects
+  \x1b[34mpublications/\x1b[0m        Academic publications
+
+\x1b[90mTip: Try 'ls' then 'cd blog' then 'cat skypilot-commands.md'\x1b[0m
 `;
     }
   },
@@ -691,11 +834,10 @@ ${randomFact}
 
       if (currentDir === '~' && !args[0]) {
         return `
-\x1b[34mblog/\x1b[0m          \x1b[36mabout.txt\x1b[0m       \x1b[36mresearch.txt\x1b[0m
-\x1b[36mwork.txt\x1b[0m       \x1b[36mprojects.txt\x1b[0m    \x1b[36mcv.pdf\x1b[0m
-\x1b[36mskills.txt\x1b[0m     \x1b[36mcontact.txt\x1b[0m
+\x1b[34mblog/\x1b[0m          \x1b[34mprojects/\x1b[0m       \x1b[34mpublications/\x1b[0m
+\x1b[36mREADME.md\x1b[0m      \x1b[36mcontact.txt\x1b[0m
 
-\x1b[90mTip: Try 'cd blog' to explore blog posts!\x1b[0m
+\x1b[90mTip: Try 'cd blog', 'cd projects', or 'cd publications'\x1b[0m
 `;
       } else if (currentDir === '~/blog' || target === 'blog' || target === '~/blog') {
         // List blog posts
@@ -708,6 +850,28 @@ ${randomFact}
         });
         output += `\n\x1b[90mUse 'cat <filename>' to read a post\x1b[0m\n`;
         return output;
+      } else if (currentDir === '~/projects' || target === 'projects' || target === '~/projects') {
+        // List projects
+        const files = Object.keys(projects).sort();
+        let output = '\n';
+        files.forEach(file => {
+          const project = projects[file];
+          output += `\x1b[36m${file}\x1b[0m\n`;
+          output += `  \x1b[90m[${project.status}] ${project.title}\x1b[0m\n`;
+        });
+        output += `\n\x1b[90mUse 'cat <filename>' to read about a project\x1b[0m\n`;
+        return output;
+      } else if (currentDir === '~/publications' || target === 'publications' || target === '~/publications') {
+        // List publications
+        const files = Object.keys(publications).sort();
+        let output = '\n';
+        files.forEach(file => {
+          const pub = publications[file];
+          output += `\x1b[36m${file}\x1b[0m\n`;
+          output += `  \x1b[90m${pub.year} - ${pub.title}\x1b[0m\n`;
+        });
+        output += `\n\x1b[90mUse 'cat <filename>' to read a publication\x1b[0m\n`;
+        return output;
       }
 
       return `\x1b[31mls: cannot access '${target}': No such directory\x1b[0m`;
@@ -719,14 +883,20 @@ ${randomFact}
     execute: (args) => {
       const target = args[0];
 
-      if (!target || target === '~' || target === '..') {
+      if (!target || target === '~') {
+        currentDir = '~';
+        return '';
+      } else if (target === '..') {
         currentDir = '~';
         return '';
       } else if (target === 'blog' || target === '~/blog') {
         currentDir = '~/blog';
         return '';
-      } else if (target === '..' && currentDir === '~/blog') {
-        currentDir = '~';
+      } else if (target === 'projects' || target === '~/projects') {
+        currentDir = '~/projects';
+        return '';
+      } else if (target === 'publications' || target === '~/publications') {
+        currentDir = '~/publications';
         return '';
       } else {
         return `\x1b[31mcd: no such directory: ${target}\x1b[0m`;
@@ -742,30 +912,70 @@ ${randomFact}
       }
 
       let filename = args[0];
+      let targetDir = currentDir;
 
-      // Handle paths like blog/filename.md
+      // Handle paths like blog/filename.md, projects/filename.md, etc.
       if (filename.startsWith('blog/')) {
         filename = filename.replace('blog/', '');
-      } else if (currentDir !== '~/blog' && !filename.includes('/')) {
-        // If we're not in blog dir and no path given, show error
-        if (currentDir === '~') {
-          return `\x1b[31mcat: ${filename}: No such file\x1b[0m\n\x1b[90mTry 'cd blog' first, or use 'cat blog/${filename}'\x1b[0m`;
-        }
+        targetDir = '~/blog';
+      } else if (filename.startsWith('projects/')) {
+        filename = filename.replace('projects/', '');
+        targetDir = '~/projects';
+      } else if (filename.startsWith('publications/')) {
+        filename = filename.replace('publications/', '');
+        targetDir = '~/publications';
       }
 
-      // Check if file exists
-      if (blogPosts[filename]) {
-        const post = blogPosts[filename];
-        return `
+      // Check based on current/target directory
+      if (targetDir === '~/blog' || currentDir === '~/blog') {
+        if (blogPosts[filename]) {
+          const post = blogPosts[filename];
+          const now = new Date().toISOString().replace('T', ' ').slice(0, 19);
+          return `
+\x1b[90m[${now}] cat ${args[0]}\x1b[0m
+
 \x1b[1m\x1b[33m${post.title}\x1b[0m
 \x1b[90mDate: ${post.date} | Tags: ${post.tags.join(', ')}\x1b[0m
 \x1b[90m${'─'.repeat(50)}\x1b[0m
 
 ${post.content}
 `;
-      } else {
-        return `\x1b[31mcat: ${args[0]}: No such file or directory\x1b[0m`;
+        }
       }
+
+      if (targetDir === '~/projects' || currentDir === '~/projects') {
+        if (projects[filename]) {
+          const project = projects[filename];
+          const now = new Date().toISOString().replace('T', ' ').slice(0, 19);
+          return `
+\x1b[90m[${now}] cat ${args[0]}\x1b[0m
+
+\x1b[1m\x1b[33m${project.title}\x1b[0m
+\x1b[90mStatus: ${project.status} | Tags: ${project.tags.join(', ')}\x1b[0m
+\x1b[90m${'─'.repeat(50)}\x1b[0m
+
+${project.content}
+`;
+        }
+      }
+
+      if (targetDir === '~/publications' || currentDir === '~/publications') {
+        if (publications[filename]) {
+          const pub = publications[filename];
+          const now = new Date().toISOString().replace('T', ' ').slice(0, 19);
+          return `
+\x1b[90m[${now}] cat ${args[0]}\x1b[0m
+
+\x1b[1m\x1b[33m${pub.title}\x1b[0m
+\x1b[90mYear: ${pub.year} | Venue: ${pub.venue}\x1b[0m
+\x1b[90m${'─'.repeat(50)}\x1b[0m
+
+${pub.content}
+`;
+        }
+      }
+
+      return `\x1b[31mcat: ${args[0]}: No such file or directory\x1b[0m`;
     }
   },
 
