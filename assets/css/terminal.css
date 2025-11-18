@@ -12,23 +12,30 @@ body {
   background-color: #0c0c0c;
   font-family: 'Cascadia Code', 'Courier New', monospace;
   overflow: hidden;
+  width: 100vw;
+  height: 100vh;
 }
 
 #terminal-container {
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
   background-color: #0c0c0c;
   overflow: hidden;
 }
 
 #terminal {
-  flex: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   padding: 20px;
-  overflow: hidden;
-  width: 100%;
-  height: 100%;
+  box-sizing: border-box;
 }
 
 /* XTerm.js customization */
