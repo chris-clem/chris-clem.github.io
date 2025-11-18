@@ -317,59 +317,18 @@ git commit -m "Initial commit"`
 
 // Projects data
 const projects = {
-  'pet-foundation-models.md': {
-    title: 'PET Foundation Models',
-    status: 'Research',
-    tags: ['Medical Imaging', 'Foundation Models', 'Harvard'],
-    content: `# PET Foundation Models @ Harvard Medical School
+  'README.md': {
+    title: 'Projects',
+    status: 'Coming Soon',
+    tags: ['placeholder'],
+    content: `# Projects
 
-Developing large-scale pre-trained models for PET/CT imaging
-at the Center for Advanced Medical Computing and Analysis (CAMCA).
+Coming soon...
 
-## Research Goals
-- Self-supervised learning for medical images
-- Transfer learning across imaging modalities
-- Improved diagnostic accuracy with less labeled data
+Check back later for detailed write-ups of research projects
+in medical imaging, deep learning, and AI drug discovery.
 
-## Collaboration
-Working under supervision of Dr. Quanzheng Li at MGH/Harvard.`
-  },
-  'tau-pet-analysis.md': {
-    title: 'Tau-PET Analysis for Alzheimer\'s',
-    status: 'Completed',
-    tags: ['Neurology', 'PET', 'Deep Learning'],
-    content: `# Tau-PET Brain Scan Analysis
-
-PhD research on interpreting tau-PET brain scans for
-neurodegenerative disease detection.
-
-## Methodology
-- 3D CNN architectures for brain imaging
-- Attention mechanisms for interpretability
-- Multi-task learning for staging
-
-## Outcomes
-- Improved early detection of Alzheimer's disease
-- Automated staging of disease progression
-- Published in peer-reviewed journals`
-  },
-  'deepfake-detection.md': {
-    title: 'Deepfake Detection System',
-    status: 'Completed',
-    tags: ['Computer Vision', 'Security', 'TUM'],
-    content: `# Deepfake Detection @ TUM Visual Computing Group
-
-Developed deepfake detection algorithms in collaboration
-with AI Foundation.
-
-## Approach
-- Face manipulation detection
-- Temporal inconsistency analysis
-- Ensemble methods for robustness
-
-## Impact
-Contributing to media authenticity verification and
-combating misinformation.`
+In the meantime, feel free to explore the blog posts or publications!`
   }
 };
 
