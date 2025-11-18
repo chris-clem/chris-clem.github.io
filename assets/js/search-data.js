@@ -3,8 +3,8 @@ const ninja = document.querySelector('ninja-keys');
 
 // add the home and posts menu items
 ninja.data = [{
-    id: "nav-about",
-    title: "about",
+    id: "nav-terminal",
+    title: "terminal",
     section: "Navigation",
     handler: () => {
       window.location.href = "/";
@@ -30,7 +30,18 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/cv/";
           },
-        },{id: "post-til-multi-node-gpu-training-with-skypilot-and-pytorch-lightning",
+        },{id: "post-til-python-template-project",
+        
+          title: "TIL: Python Template Project",
+        
+        description: "A quick tip about python",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/til-python-python-template-project/";
+          
+        },
+      },{id: "post-til-multi-node-gpu-training-with-skypilot-and-pytorch-lightning",
         
           title: "TIL: Multi-node GPU training with SkyPilot and PyTorch Lightning",
         
