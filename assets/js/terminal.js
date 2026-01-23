@@ -52,8 +52,8 @@ const banner = `\x1b[1m\x1b[36m
    ║  ╠═╣╠╦╝║╚═╗ ║ ║ ║╠═╝╠═╣  ║  ║  ║╣ ║║║║╣ ║║║ ║
    ╚═╝╩ ╩╩╚═╩╚═╝ ╩ ╚═╝╩  ╩ ╩  ╚═╝╩═╝╚═╝╩ ╩╚═╝╝╚╝ ╩
 \x1b[0m
-   \x1b[90mMachine Learning Engineer | AI Drug Discovery\x1b[0m
-   \x1b[90mPhD Biomedical Engineering | Harvard Researcher\x1b[0m
+   \x1b[90mMachine Learning Engineer @ Khumbu.ai\x1b[0m
+   \x1b[90mPhD Biomedical Engineering | Type 1 Diabetes & Cycling Enthusiast\x1b[0m
 
 \x1b[1m\x1b[33mWelcome to Christoph's interactive terminal!\x1b[0m
 \x1b[90mType '\x1b[37mhelp\x1b[90m' to see available commands or '\x1b[37mclear\x1b[90m' to clear the screen.\x1b[0m
@@ -392,6 +392,33 @@ Clement et al., IEEE Trans. Medical Imaging, 2022`
   }
 };
 
+// Root directory files
+const rootFiles = {
+  'README.md': {
+    content: `# Christoph Clement
+
+Personal website built with al-folio.
+
+Visit: https://chris-clem.github.io
+
+This is an interactive terminal interface - explore using commands like:
+  - ls (list files)
+  - cd blog (navigate to blog)
+  - cat <file> (read files)
+  - help (see all commands)`
+  },
+  'contact.txt': {
+    content: `Contact Information
+==================
+
+Location: Munich, Bavaria, Germany
+Company: Khumbu AI
+Website: https://chris-clem.github.io/
+
+Type 'contact' for more information or 'social' for social media links.`
+  }
+};
+
 // Current directory for filesystem simulation
 let currentDir = '~';
 
@@ -440,12 +467,12 @@ const commands = {
       return `
 \x1b[1m\x1b[36m🧬 About Christoph Clement\x1b[0m
 
-I'm a Machine Learning Engineer at \x1b[33mKhumbu\x1b[0m, where I leverage cutting-edge
-AI models for drug discovery with an initial focus on diabetes.
+I'm a Machine Learning Engineer at \x1b[33mKhumbu.ai\x1b[0m, an AI drug discovery 
+startup in Munich, where I leverage cutting-edge AI models for drug discovery 
+with an initial focus on diabetes.
 
 I recently completed my PhD in \x1b[35mBiomedical Engineering\x1b[0m at the University
-of Bern, complemented by research on PET foundation models at Harvard
-Medical School.
+of Bern (2021-2024), where I maintain a 5% postdoctoral affiliation.
 
 \x1b[32mResearch Focus:\x1b[0m
   • Deep Learning for Medical Imaging
@@ -454,9 +481,15 @@ Medical School.
   • AI-Driven Drug Discovery
   • Organ-on-Chip Imaging
 
-\x1b[36mVisiting Researcher:\x1b[0m
-  Center for Advanced Medical Computing and Analysis (CAMCA)
-  Harvard Medical School
+\x1b[36mPrevious Experience:\x1b[0m
+  • Visiting Researcher at CAMCA, Boston
+  • Researcher at TU München (deepfake detection)
+  • Data Science Trainer at Celonis
+  • Researcher at tacterion
+
+\x1b[33mPersonal:\x1b[0m
+  • Type 1 Diabetic (passionate about diabetes management tech)
+  • Cycling enthusiast
 
 Type '\x1b[37mwork\x1b[0m' to learn more about my current work.
 Type '\x1b[37mresearch\x1b[0m' to explore my research interests.
@@ -469,10 +502,11 @@ Type '\x1b[37mresearch\x1b[0m' to explore my research interests.
     execute: () => {
       return `
 \x1b[36mChristoph Clement\x1b[0m
-\x1b[90m├─\x1b[0m Role: Machine Learning Engineer @ Khumbu
+\x1b[90m├─\x1b[0m Role: Machine Learning Engineer @ Khumbu.ai
 \x1b[90m├─\x1b[0m Location: Munich, Germany
-\x1b[90m├─\x1b[0m Education: PhD in Biomedical Engineering
-\x1b[90m└─\x1b[0m Passion: AI for Healthcare & Drug Discovery
+\x1b[90m├─\x1b[0m Education: PhD Biomedical Engineering (Univ. Bern, 2021-2024)
+\x1b[90m├─\x1b[0m Passion: AI for Drug Discovery, Diabetes Management, Cycling
+\x1b[90m└─\x1b[0m Type 1 Diabetic
 
 Type '\x1b[37mabout\x1b[0m' for more details.
 `;
@@ -485,8 +519,9 @@ Type '\x1b[37mabout\x1b[0m' for more details.
       return `
 \x1b[1m\x1b[33m💊 Current Work\x1b[0m
 
-\x1b[32mKhumbu AI\x1b[0m - Machine Learning Engineer
+\x1b[32mKhumbu.ai\x1b[0m - Machine Learning Engineer
 \x1b[90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\x1b[0m
+AI drug discovery startup based in Munich, Germany.
 Leveraging cutting-edge AI models for drug discovery with an initial
 focus on diabetes. Building and deploying ML pipelines for:
   • Molecular property prediction
@@ -494,12 +529,10 @@ focus on diabetes. Building and deploying ML pipelines for:
   • Generative models for molecule design
   • Large-scale data processing
 
-\x1b[35mHarvard Medical School\x1b[0m - Visiting Researcher
+\x1b[35mUniversity of Bern\x1b[0m - 5% Postdoc Affiliation
 \x1b[90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\x1b[0m
-Center for Advanced Medical Computing and Analysis (CAMCA)
-  • Developing foundation models for PET/CT imaging
-  • Working under supervision of Dr. Quanzheng Li
-  • Advancing medical image analysis techniques
+PhD in Biomedical Engineering (2021-2024)
+Ongoing collaboration and research support
 
 \x1b[36m🌐 Website:\x1b[0m https://www.khumbu.ai/
 `;
@@ -512,11 +545,12 @@ Center for Advanced Medical Computing and Analysis (CAMCA)
       return `
 \x1b[1m\x1b[36m🎓 Education\x1b[0m
 
-\x1b[32mPhD in Biomedical Engineering\x1b[0m
+\x1b[32mPhD in Biomedical Engineering (2021-2024)\x1b[0m
 University of Bern, Switzerland
-\x1b[90m├─\x1b[0m Research: PET foundation models
+\x1b[90m├─\x1b[0m Research: PET foundation models, Organ-on-Chip imaging
 \x1b[90m├─\x1b[0m Focus: Deep learning for medical imaging
-\x1b[90m└─\x1b[0m Collaboration: Harvard Medical School
+\x1b[90m├─\x1b[0m 5% postdoc affiliation ongoing
+\x1b[90m└─\x1b[0m Visiting Research: CAMCA, Boston (not Harvard affiliation)
 
 \x1b[32mM.Sc. Robotics, Cognition, and Intelligence\x1b[0m
 Technical University of Munich (TUM), Germany
@@ -554,12 +588,17 @@ Center for Digital Technology and Management (CDTM)
      └─ Novel imaging approaches for micro-physiological systems
   🤖 Foundation Models for Medical Imaging
      └─ Large-scale pre-training for PET imaging
+  💉 Diabetes Management Technology
+     └─ AI for Type 1 diabetes care and monitoring
 
-\x1b[36mKey Projects:\x1b[0m
-  • CT-free total-body PET segmentation
-  • Tau-PET interpretation for Alzheimer's disease
-  • Deepfake detection (TUM Visual Computing Group)
-  • Foundation models for PET/CT (Harvard)
+\x1b[36mKey Projects & Experience:\x1b[0m
+  • AI drug discovery at Khumbu.ai (current)
+  • CT-free total-body PET segmentation (PhD)
+  • Tau-PET interpretation for Alzheimer's disease (PhD)
+  • Visiting Researcher at CAMCA, Boston (PET foundation models)
+  • Deepfake detection at TU München
+  • Data Science training at Celonis
+  • Research at tacterion
 
 \x1b[33m📄 Publications:\x1b[0m Visit my website to see selected papers
    → Type '\x1b[37mcv\x1b[0m' to view full academic CV
@@ -863,6 +902,17 @@ ${randomFact}
       } else if (filename.startsWith('publications/')) {
         filename = filename.replace('publications/', '');
         targetDir = '~/publications';
+      }
+
+      // Check root directory files first
+      if (currentDir === '~' && rootFiles[filename]) {
+        const file = rootFiles[filename];
+        const now = new Date().toISOString().replace('T', ' ').slice(0, 19);
+        return `
+\x1b[90m[${now}] cat ${args[0]}\x1b[0m
+
+${file.content}
+`;
       }
 
       // Check based on current/target directory
