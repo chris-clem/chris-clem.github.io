@@ -53,7 +53,7 @@ const banner = `\x1b[1m\x1b[36m
    ╚═╝╩ ╩╩╚═╩╚═╝ ╩ ╚═╝╩  ╩ ╩  ╚═╝╩═╝╚═╝╩ ╩╚═╝╝╚╝ ╩
 \x1b[0m
    \x1b[90mMachine Learning Engineer @ Khumbu.ai\x1b[0m
-   \x1b[90mPhD Biomedical Engineering | Type 1 Diabetes & Cycling Enthusiast\x1b[0m
+   \x1b[90mPhD Biomedical Engineering | AI Drug Discovery\x1b[0m
 
 \x1b[1m\x1b[33mWelcome to Christoph's interactive terminal!\x1b[0m
 \x1b[90mType '\x1b[37mhelp\x1b[90m' to see available commands or '\x1b[37mclear\x1b[90m' to clear the screen.\x1b[0m
@@ -487,10 +487,6 @@ of Bern (2021-2024), where I maintain a 5% postdoctoral affiliation.
   • Data Science Trainer at Celonis
   • Researcher at tacterion
 
-\x1b[33mPersonal:\x1b[0m
-  • Type 1 Diabetic (passionate about diabetes management tech)
-  • Cycling enthusiast
-
 Type '\x1b[37mwork\x1b[0m' to learn more about my current work.
 Type '\x1b[37mresearch\x1b[0m' to explore my research interests.
 `;
@@ -505,8 +501,7 @@ Type '\x1b[37mresearch\x1b[0m' to explore my research interests.
 \x1b[90m├─\x1b[0m Role: Machine Learning Engineer @ Khumbu.ai
 \x1b[90m├─\x1b[0m Location: Munich, Germany
 \x1b[90m├─\x1b[0m Education: PhD Biomedical Engineering (Univ. Bern, 2021-2024)
-\x1b[90m├─\x1b[0m Passion: AI for Drug Discovery, Diabetes Management, Cycling
-\x1b[90m└─\x1b[0m Type 1 Diabetic
+\x1b[90m└─\x1b[0m Focus: AI for Drug Discovery
 
 Type '\x1b[37mabout\x1b[0m' for more details.
 `;
@@ -588,8 +583,6 @@ Center for Digital Technology and Management (CDTM)
      └─ Novel imaging approaches for micro-physiological systems
   🤖 Foundation Models for Medical Imaging
      └─ Large-scale pre-training for PET imaging
-  💉 Diabetes Management Technology
-     └─ AI for Type 1 diabetes care and monitoring
 
 \x1b[36mKey Projects & Experience:\x1b[0m
   • AI drug discovery at Khumbu.ai (current)
