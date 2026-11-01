@@ -1,0 +1,52 @@
+# Source: Christoph's LinkedIn profile export, supplied November 2026.
+experience:
+  - organization: Khumbu
+    role: Machine Learning Engineer
+    dates: Jan 2025 – present
+    selected: true
+    description: Building and scaling applied AI systems for drug discovery, spanning binding-affinity prediction, protein modeling, and research infrastructure.
+  - organization: Harvard Medical School & MGH
+    role: Visiting Researcher, CAMCA
+    dates: Jul – Nov 2024
+    selected: true
+    description: Worked on PET/CT foundation models at the Center for Advanced Medical Computing and Analysis under the supervision of Dr. Quanzheng Li.
+  - organization: Technical University of Munich
+    role: Research Assistant, Visual Computing Group
+    dates: Oct 2019 – Mar 2020
+    selected: true
+    description: Built a browser-based deepfake detector with the AI Foundation using PyTorch. Supported model training, evaluation, continuous integration, and deployment workflows.
+  - organization: Celonis
+    role: Data Scientist & Trainer
+    dates: Aug 2018 – Jul 2019
+    selected: true
+    description: Implemented process-mining analyses using SQL and SAP HANA, then delivered hands-on data science and process-mining workshops for enterprise customers across Europe.
+  - organization: tacterion
+    role: Working Student, Test and Data Engineering
+    dates: Jan 2017 – Jul 2018
+    description: Built automated test rigs and data-sheet generation workflows in C++ and Python. Developed TensorFlow-based gesture-recognition prototypes and supported ISO 9001:2015 preparation.
+  - organization: Blue Ocean Robotics
+    role: Working Student
+    dates: Oct – Dec 2016
+  - organization: Cypress Semiconductor Corporation
+    role: Working Student, Test Engineering
+    dates: Aug 2014 – Sep 2016
+
+education:
+  - organization: University of Bern
+    role: PhD, Biomedical Engineering
+    dates: Jan 2021 – Nov 2024
+    selected: true
+  - organization: CDTM
+    role: Honors Degree, Technology Management
+    dates: 2019 – 2021
+    selected: true
+  - organization: Technical University of Munich
+    role: MSc, Robotics, Cognition, Intelligence
+    dates: 2018 – 2020
+    selected: true
+  - organization: University of Bern
+    role: Master's Thesis, Robotics, Cognition, Intelligence
+    dates: "2020"
+  - organization: Bayerische EliteAkademie
+    role: Scholarship Program
+    dates: 2017 – 2019

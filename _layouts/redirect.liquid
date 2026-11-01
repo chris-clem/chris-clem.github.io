@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% if page.destination contains '://' %}
+      {% assign destination = page.destination %}
+    {% else %}
+      {% assign destination = page.destination | relative_url %}
+    {% endif %}
+    <meta http-equiv="refresh" content="0; url={{ destination }}">
+    <link rel="canonical" href="{{ destination | absolute_url }}">
+    <title>
+      {{ page.title }}
+      | Christoph Clement
+    </title>
+  </head>
+  <body>
+    <p>
+      <a href="{{ destination }}">{{ page.link_text | default: page.title }}</a>
+    </p>
+  </body>
+</html>

@@ -8,12 +8,10 @@ middle_name:
 last_name: Clement
 contact_note: >
   Feel free to reach out via email or LinkedIn.
-description: > # the ">" symbol means to ignore newlines until "footer_text:"
-  Machine Learning Engineer at Khumbu | AI Drug Discovery | PhD in Biomedical Engineering | CDTM | BEA
-footer_text: >
-  Powered by <a href="https://jekyllrb.com/" target="_blank">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio">al-folio</a> theme.
-  Hosted by <a href="https://pages.github.com/" target="_blank">GitHub Pages</a>.
-  Photos from <a href="https://unsplash.com" target="_blank">Unsplash</a>.
+description: >
+  Machine Learning Engineer at Khumbu in Munich. Applied AI for drug discovery, biomedical imaging, and scientific workflows.
+footer_text:
+scholar_url: https://scholar.google.com/citations?user=WWYOCJUAAAAJ
 keywords: machine-learning, deep-learning, medical-imaging, biomedical-engineering, ai-drug-discovery, pet-imaging # add your own keywords or leave empty
 lang: en # the language of your site (for example: en, fr, cn, ru, etc.)
 icon: ⚛️ # the emoji used as the favicon (alternatively, provide image name in /assets/img/)
@@ -46,9 +44,9 @@ repo_trophies:
 # Layout
 # -----------------------------------------------------------------------------
 
-navbar_fixed: true
-footer_fixed: true
-search_enabled: true
+navbar_fixed: false
+footer_fixed: false
+search_enabled: false
 socials_in_search: true
 posts_in_search: true
 bib_search: true
@@ -86,8 +84,8 @@ bing_site_verification: # out your bing-site-verification ID (Bing Webmaster)
 # Blog
 # -----------------------------------------------------------------------------
 
-blog_name: Blog # blog_name will be displayed in your blog page
-blog_description: Thoughts on machine learning, medical imaging, and AI drug discovery
+blog_name: Notes # blog_name will be displayed in your blog page
+blog_description: Short technical notes from my day-to-day work.
 permalink: /blog/:year/:title/
 lsi: false # produce an index for related posts
 
@@ -226,6 +224,7 @@ sass:
 
 jekyll-minifier:
   compress_javascript: false # set to false since we are using terser as the js minifier
+  compress_css: false # Sass already compresses main.css; avoid the slow duplicate CSSminify2 pass.
   exclude: ["robots.txt", "assets/js/search/*.js"]
 
 # -----------------------------------------------------------------------------
@@ -379,11 +378,11 @@ enable_bing_verification: false # enables bing site verification
 enable_masonry: true # enables automatic project cards arrangement
 enable_math: true # enables math typesetting (uses MathJax)
 enable_tooltips: false # enables automatic tooltip links generated for each section titles on pages and posts
-enable_darkmode: true # enables switching between light/dark modes
+enable_darkmode: false # keeps the profile and notes in the same light theme
 enable_navbar_social: false # enables displaying social links in the navbar on the about page
 enable_project_categories: true # enables categorization of projects into multiple categories
 enable_medium_zoom: true # enables image zoom feature (as on medium.com)
-enable_progressbar: true # enables a horizontal progress bar linked to the vertical scroll position
+enable_progressbar: false # the simplified header has no reading-progress indicator
 enable_video_embedding: false # enables video embedding for bibtex entries. If false, the button opens the video link in a new window.
 
 # -----------------------------------------------------------------------------

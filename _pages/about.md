@@ -1,34 +1,14 @@
 ---
 layout: about
-title: about
-permalink: /about/
-subtitle: Machine Learning Engineer at <a href='https://www.khumbu.ai/'>Khumbu</a>
-
-profile:
-  align: right
-  image: prof_pic.jpg
-  image_circular: false # crops the image to make it circular
-  more_info: >
-    <p>Munich, Bavaria, Germany</p>
-
-selected_papers: true # includes a list of papers marked as "selected={true}"
-social: true # includes social icons at the bottom of the page
-
-announcements:
-  enabled: false # includes a list of news items
-  scrollable: true # adds a vertical scroll bar if there are more than 3 news items
-  limit: 5 # leave blank to include all the news in the `_news` folder
-
-latest_posts:
-  enabled: false
-  scrollable: true # adds a vertical scroll bar if there are more than 3 new posts items
-  limit: 3 # leave blank to include all the blog posts
+title: About
+permalink: /
+description: Machine Learning Engineer at Khumbu in Munich. Applied AI for drug discovery, biomedical imaging, and scientific workflows.
 ---
 
-I am a Machine Learning Engineer at [Khumbu](https://www.khumbu.ai/), an AI drug discovery startup based in Munich, where I leverage cutting-edge AI models for drug discovery with an initial focus on diabetes. I recently completed my PhD in Biomedical Engineering at the [University of Bern](https://www.unibe.ch/) (2021-2024), where I maintain a 5% postdoctoral affiliation.
+I build and scale applied AI systems at [Khumbu](https://www.khumbu.ai/) in Munich. We are building a world model for molecular biology to advance drug discovery, with an initial focus on diabetes. My work spans binding-affinity prediction, protein modeling, and the engineering infrastructure behind research workflows.
 
-My research focuses on applying deep learning and medical imaging analysis to solve significant healthcare challenges. During my PhD, I developed innovative approaches for high-resolution Organ-on-Chip imaging, interpreted tau-PET brain scans for neurodegenerative diseases, and advanced CT-free total-body PET segmentation. As a Visiting Researcher at the [Center for Advanced Medical Computing and Analysis (CAMCA)](https://camca.mgh.harvard.edu/) in Boston, I worked on foundational models for PET/CT imaging under the supervision of Dr. Quanzheng Li.
+Living with type 1 diabetes makes healthcare personal to me. It’s a big part of why I work on applying AI to drug discovery.
 
-I hold a Master's degree in Robotics, Cognition, and Intelligence from the [Technical University of Munich (TUM)](https://www.tum.de/), where I specialized in computer-aided medical procedures, computer vision, and deep learning. I also completed an honors degree in Technology Management at the [Center for Digital Technology and Management (CDTM)](https://www.cdtm.de/), combining technical expertise with entrepreneurial skills.
+I completed my PhD in Biomedical Engineering at the [University of Bern](https://www.unibe.ch/) in 2024, working on biomedical AI and medical imaging in nuclear medicine. During a research stay at Harvard Medical School and Massachusetts General Hospital, I worked on PET/CT foundation models.
 
-Previously, I worked on deepfake detection at TUM's Visual Computing Group in collaboration with the AI Foundation, and gained industry experience as a Data Science Trainer at Celonis, where I delivered hands-on workshops across Europe, and as a researcher at tacterion.
+Earlier, I worked on deepfake detection at TUM and delivered data science workshops at Celonis. My background also includes robotics at TUM and Technology Management at [CDTM](https://www.cdtm.de/).

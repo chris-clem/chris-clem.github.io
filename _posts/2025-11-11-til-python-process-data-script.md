@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 'TIL: Template data processing script with pathlib, fire, joblib, loguru, and tqdm'
+title: "TIL: Template data processing script with pathlib, fire, joblib, loguru, and tqdm"
 date: 2025-11-11 12:00:00
 description: A quick tip about python
 tags: til python
@@ -11,7 +11,6 @@ til_source: https://github.com/chris-clem/til/blob/main/python/process-data-scri
 Template script for processing data with packages I am using most often.
 
 I have added it as a Raycast snippet `@script`
-
 
 ```python
 from pathlib import Path

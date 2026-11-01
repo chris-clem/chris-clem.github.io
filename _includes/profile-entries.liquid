@@ -1,0 +1,14 @@
+<ul class="profile-entries">
+  {% for entry in include.entries %}
+    <li class="profile-entry">
+      <span class="profile-date">{{ entry.dates }}</span>
+      <div>
+        <h3>{{ entry.organization }}</h3>
+        <p>{{ entry.role }}</p>
+        {% if include.details and entry.description %}
+          <p class="profile-entry-description">{{ entry.description }}</p>
+        {% endif %}
+      </div>
+    </li>
+  {% endfor %}
+</ul>

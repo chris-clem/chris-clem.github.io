@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 'TIL: Quickly open remote dirs in Windsurf'
+title: "TIL: Quickly open remote dirs in Windsurf"
 date: 2025-11-07 12:00:00
 description: A quick tip about windsurf
 tags: til windsurf

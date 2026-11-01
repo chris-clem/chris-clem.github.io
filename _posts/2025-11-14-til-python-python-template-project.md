@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 'TIL: Python Template Project'
+title: "TIL: Python Template Project"
 date: 2025-11-14 12:00:00
 description: A quick tip about python
 tags: til python
@@ -9,17 +9,20 @@ til_source: https://github.com/chris-clem/til/blob/main/python/python-template-p
 ---
 
 ## 1. Initialize project as a uv packaged application
+
 ```bash
 uv init --package project-name
 ```
 
 ## 2. Create venv by running it
+
 ```bash
 cd project-name
 uv run project-name
 ```
 
 ## 3. Add dependencies to `pyproject.toml` and install them
+
 ```bash
 uv add fire joblib loguru tqdm
 ```
@@ -34,7 +37,7 @@ repos:
     rev: v6.0.0
     hooks:
       - id: check-added-large-files
-        args: ['--maxkb=1000']
+        args: ["--maxkb=1000"]
       - id: check-ast
       - id: check-builtin-literals
       - id: check-json
@@ -44,9 +47,9 @@ repos:
       - id: detect-private-key
       - id: end-of-file-fixer
       - id: mixed-line-ending
-        args: ['--fix=lf']
+        args: ["--fix=lf"]
       - id: pretty-format-json
-        args: ['--autofix']
+        args: ["--autofix"]
       - id: trailing-whitespace
   - repo: https://github.com/astral-sh/ruff-pre-commit
     rev: v0.14.5
@@ -54,7 +57,6 @@ repos:
       - id: ruff-check
         args: [--fix]
       - id: ruff-format
-
 ```
 
 Install them by running:
